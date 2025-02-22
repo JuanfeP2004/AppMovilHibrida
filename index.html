@@ -61,7 +61,7 @@
     <main class="verHoy">
         <header>
             <div>
-                <img src="img/backToLogin.png" alt="">
+                <img src="img/backToLogin.png" alt="" class="navButton" data-page="inicioSesion">
             </div>
         </header>
         <nav>
@@ -127,13 +127,13 @@
 
     <main class="calendario">
         <div>
-            <img src="img/backToLogin.png" alt="">
+            <img src="img/backToLogin.png" alt="" class="navButton" data-page="inicioSesion">
         </div>
         <div>
-            <div><a href="">Hoy</a></div>
-            <div><a href="">Calendario</a></div>
-            <div><a href="">Pomodoro</a></div>
-            <div><a href="">+</a></div>
+            <div><a href="" class="navButton" data-page="verHoy">Hoy</a></div>
+            <div><a href="" class="navButton" data-page="calendario">Calendario</a></div>
+            <div><a href="" class="navButton" data-page="pomodoro">Pomodoro</a></div>
+            <div><a href="" class="navButton" data-page="crearTarea">+</a></div>
         </div>
 
         <div>
@@ -236,7 +236,7 @@
     <main class="pomodoro">
         <header>
             <div>
-                <img src="img/back-arrow-navigation.svg" alt="">
+                <img src="img/back-arrow-navigation.svg" alt="" class="navButton" data-page="verHoy">
             </div>
         </header>
         <div>
@@ -280,8 +280,8 @@
                 <input type="text" name="nombre" placeholder="Titulo">
                 <input type="datetime-local" name="fecha" id="">
                 <input type="text" name="descripcion" placeholder="Valor">
-                <button>Cancelar</button>
-                <button>Crear</button>
+                <button class="navButton" data-page="verHoy">Cancelar</button>
+                <button class="navButton" data-page="verHoy">Crear</button>
             </form>
         </div>
     </main>

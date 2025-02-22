@@ -29,7 +29,28 @@ function cambiarPagina(evento){
             document.querySelector('.crearTarea').style.display = 'none';
             break;
         case 'calendario':
-            
+            document.querySelector('.inicioSesion').style.display = 'none';
+            document.querySelector('.registro').style.display = 'none';
+            document.querySelector('.verHoy').style.display = 'none';
+            document.querySelector('.calendario').style.display = 'block';
+            document.querySelector('.pomodoro').style.display = 'none';
+            document.querySelector('.crearTarea').style.display = 'none';
+            break;
+        case 'pomodoro':
+            document.querySelector('.inicioSesion').style.display = 'none';
+            document.querySelector('.registro').style.display = 'none';
+            document.querySelector('.verHoy').style.display = 'none';
+            document.querySelector('.calendario').style.display = 'none';
+            document.querySelector('.pomodoro').style.display = 'block';
+            document.querySelector('.crearTarea').style.display = 'none';
+            break;
+        case 'crearTarea':
+            document.querySelector('.inicioSesion').style.display = 'none';
+            document.querySelector('.registro').style.display = 'none';
+            document.querySelector('.verHoy').style.display = 'none';
+            document.querySelector('.calendario').style.display = 'none';
+            document.querySelector('.pomodoro').style.display = 'none';
+            document.querySelector('.crearTarea').style.display = 'block';
             break;
     }
 }
