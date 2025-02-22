@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studyflow</title>
+    <script src="js/navegation.js" defer></script>
 </head>
 <body>
     <main class="inicioSesion">
@@ -22,10 +23,10 @@
                 <input type="password" id="password" placeholder="Contraseña">
             </div>
             <div>
-                <button type="submit">Ingresar</button>
+                <button type="submit" class="navButton" data-page="verHoy">Ingresar</button>
             </div>
             <div>
-                <button type="button" id="registerBtn">Crea tu cuenta</button>
+                <button type="button" id="registerBtn" class="navButton" data-page="registro">Crea tu cuenta</button>
             </div>
         </form>
     </main>
@@ -49,10 +50,10 @@
                 <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
             </div>
             <div>
-                <button type="submit">Crear cuenta</button>
+                <button type="submit" class="navButton">Crear cuenta</button>
             </div>
             <div>
-                <button type="button"  id="loginBtn">Ya tengo una cuenta</button>
+                <button type="button"  id="loginBtn" class="navButton">Ya tengo una cuenta</button>
             </div>
         </form>
     </main>
