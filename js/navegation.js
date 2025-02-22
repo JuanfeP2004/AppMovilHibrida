@@ -4,7 +4,7 @@ function cambiarPagina(evento){
     evento.preventDefault()
 
     switch(parametro){
-        case 'ingreso':
+        case 'inicioSesion':
             document.querySelector('.inicioSesion').style.display = 'block';
             document.querySelector('.registro').style.display = 'none';
             document.querySelector('.verHoy').style.display = 'none';
@@ -29,10 +29,19 @@ function cambiarPagina(evento){
             document.querySelector('.crearTarea').style.display = 'none';
             break;
         case 'calendario':
-            window.location.href = 'services.html';
+            
             break;
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.inicioSesion').style.display = 'block';
+    document.querySelector('.registro').style.display = 'none';
+    document.querySelector('.verHoy').style.display = 'none';
+    document.querySelector('.calendario').style.display = 'none';
+    document.querySelector('.pomodoro').style.display = 'none';
+    document.querySelector('.crearTarea').style.display = 'none';
+});
 
 document.querySelectorAll('.navButton').forEach(item => {
     item.addEventListener('click', cambiarPagina);
