@@ -6,7 +6,283 @@
     <title>Studyflow</title>
 </head>
 <body>
-    <a href="calendario.html">Calendario</a>
-    <a href="crearTarea.html">Crear</a>
+    <main class="inicioSesion">
+        <header>
+            <div>
+                <img src="img/logo.png" alt="Logo de StudyFlow">
+            </div>
+            <h1>Inicio de Sesión</h1>
+        </header>
+
+        <form id="loginForm">
+            <div>
+                <input type="text" id="username" placeholder="Usuario">
+            </div>
+            <div>
+                <input type="password" id="password" placeholder="Contraseña">
+            </div>
+            <div>
+                <button type="submit">Ingresar</button>
+            </div>
+            <div>
+                <button type="button" id="registerBtn">Crea tu cuenta</button>
+            </div>
+        </form>
+    </main>
+
+    <main class="registro">
+        <header>
+            <div>
+                <img src="img/logo.png" alt="Logo de StudyFlow">
+            </div>
+            <h1>Crea tu cuenta</h1>
+        </header>
+
+        <form id="registerForm">
+            <div>
+                <input type="text" id="username" placeholder="Usuario">
+            </div>
+            <div>
+                <input type="password" id="password" placeholder="Contraseña">
+            </div>
+            <div>
+                <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
+            </div>
+            <div>
+                <button type="submit">Crear cuenta</button>
+            </div>
+            <div>
+                <button type="button"  id="loginBtn">Ya tengo una cuenta</button>
+            </div>
+        </form>
+    </main>
+
+    <main class="verHoy">
+        <header>
+            <div>
+                <img src="img/backToLogin.png" alt="">
+            </div>
+        </header>
+        <nav>
+            <div>
+                <div><a href="">Hoy</a></div>
+                <div><a href="">Calendario</a></div>
+                <div><a href="">Pomodoro</a></div>
+                <div><a href="crearTarea.html">+</a></div>
+            </div>
+        </nav>  
+        <div>
+            <div>
+                <div>
+                    <p>Lunes</p>
+                    <h2>17 Febrero</h2>
+                </div>
+                <div>
+                    <h3>6:50 AM</h3>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <h2>
+                            Parcial #1 Algebra Lineal
+                        </h2>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <p>Unidades 3 - 5</p>
+                            </li>
+                            <li>
+                                <p>8:00 AM</p>
+                            <li>
+                                <p>20%</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h2>
+                            Exposición Arquitectura de computadores
+                        </h2>
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                <p>Arq. RISC y CISC</p>
+                            </li>
+                            <li>
+                                <p>14:00 PM</p>
+                            <li>
+                                <p>10%</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <main class="calendario">
+        <div>
+            <img src="img/backToLogin.png" alt="">
+        </div>
+        <div>
+            <div><a href="">Hoy</a></div>
+            <div><a href="">Calendario</a></div>
+            <div><a href="">Pomodoro</a></div>
+            <div><a href="crearTarea.html">+</a></div>
+        </div>
+
+        <div>
+            <p>Enero</p>
+            <p><em>&lt;</em> Febrero <em>&gt;</em> </p>
+            <p>Marzo</p>
+        </div>
+        <div>
+            <div>
+                <div>
+                    <p>Lunes <em>17</em></p>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <p>8:00AM</p>
+                            <p>Parcia #1 Algebra Lineal</p>
+                            <p>20%</p>
+                        </li>
+                        <li>
+                            <p>14:00PM</p>
+                            <p>Exposición Arquitectura de computadores</p>
+                            <p>10%</p>
+                        </li>
+                    </ul> 
+                </div>
+                <div>
+                    <div><a href="crearTarea.html">+</a></div>
+                </div>             
+            </div>
+            <div>
+                <div>
+                    <p>Martes <em>18</em></p>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <p>10:00AM</p>
+                            <p>Parcia #1 Estructuras de datos y algoritmos</p>
+                            <p>20%</p>
+                        </li>
+                        <li>
+                            <p>11:59AM</p>
+                            <p>Entrega #1 Contexto Profesional</p>
+                            <p>10%</p>
+                        </li>
+                    </ul> 
+                </div>
+                <div>
+                    <div><a href="crearTarea.html">+</a></div>
+                </div>            
+            </div>
+            <div>
+                <div>
+                    <p>Miercoles <em>19</em></p>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <p>12:00PN</p>
+                            <p>Parcia #1 Bases de datos</p>
+                            <p>20%</p>
+                        </li>
+                        <li>
+                            <p>13:00PM</p>
+                            <p></p>
+                            <p></p>
+                        </li>
+                    </ul> 
+                </div>
+                <div>
+                    <div><a href="crearTarea.html">+</a></div>
+                </div>             
+            </div>
+            <div>
+                <div>
+                    <p>Jueves <em>20</em></p>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <p>6:00AM</p>
+                            <p></p>
+                            <p></p>
+                        </li>
+                        <li>
+                            <p>7:00AM</p>
+                            <p></p>
+                            <p></p>
+                        </li>
+                    </ul> 
+                </div>  
+                <div>
+                    <div><a href="crearTarea.html">+</a></div>
+                </div>            
+            </div>
+        </div>
+    </main>
+
+    <main class="pomodoro">
+        <header>
+            <div>
+                <img src="img/back-arrow-navigation.svg" alt="">
+            </div>
+        </header>
+        <div>
+            <div>
+                <img src="img/logo.png" alt="">
+                <h1>Pomodoro</h1>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <h2>25:00</h2>
+                        <h3>minutos</h3>
+                    </div>
+                    <div>
+                        <img src="img/settings.svg" alt="">
+                    </div>
+                </div>
+                <div>
+                    <input type="number" placeholder="Repeticiones" required min="1">
+                    <button>Iniciar</button>
+                    <button>Detener</button>
+                </div>
+            </div>
+            <div>
+                <h2>RACHA POMODORO: 12 DÍAS <img src="img/fire.svg" alt=""></h2>
+            </div>
+        </div>
+    </main>
+
+    <main class="crearTarea">
+        <img src="img/logo.png" alt="">
+        <h2>Crear Nueva Tarea</h2>
+        <div>
+            <form action="">
+                <select name="tipo" id="">
+                    <option value="0">Tipo</option>
+                    <option value="1">Tarea</option>
+                    <option value="2">Estudio</option>
+                    <option value="3">Examen</option>
+                </select>
+                <input type="text" name="nombre" placeholder="Titulo">
+                <input type="datetime-local" name="fecha" id="">
+                <input type="text" name="descripcion" placeholder="Valor">
+                <button>Cancelar</button>
+                <button>Crear</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>
