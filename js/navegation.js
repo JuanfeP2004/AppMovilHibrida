@@ -1,6 +1,5 @@
 function cambiarPagina(evento){
     let parametro = evento.target.getAttribute('data-page');
-    alert("Parámetro recibido: " + parametro);
     evento.preventDefault()
 
     switch(parametro){
