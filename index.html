@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studyflow</title>
+  <script src="js/navegation.js" defer></script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <main>
+    <!-- Sección de Inicio de Sesión -->
+    <section id="inicioSesion" class="active">
+      <header>
+        <div>
+          <img src="public\images\StudyFlow-logo.png" alt="Logo de StudyFlow">
+        </div>
+        <h1>Inicio de Sesión</h1>
+      </header>
+
+      <form id="loginForm">
+        <div>
+          <input type="text" id="loginUsername" placeholder="Usuario">
+        </div>
+        <div>
+          <input type="password" id="loginPassword" placeholder="Contraseña">
+        </div>
+        <div>
+          <button type="submit" class="navButton" data-page="verHoy">Ingresar</button>
+        </div>
+        <div>
+          <button type="button" class="navButton" data-page="registro">Crea tu cuenta</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Sección de Registro -->
+    <section id="registro" class="hidden">
+      <header>
+        <div>
+          <img src="public\images\StudyFlow-logo.png" alt="Logo de StudyFlow">
+        </div>
+        <h1>Crea tu cuenta</h1>
+      </header>
+
+      <form id="registerForm">
+        <div>
+          <input type="text" id="registerUsername" placeholder="Usuario">
+        </div>
+        <div>
+          <input type="password" id="registerPassword" placeholder="Contraseña">
+        </div>
+        <div>
+          <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
+        </div>
+        <div>
+          <button type="submit" class="navButton" data-page="inicioSesion">Crear cuenta</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Sección de la vista principal -->
+    <section>
+
+    </section>
+
+    <!-- Sección de la vista calendario -->
+    <section>
+    </section>
+
+    <!-- Sección de la vista crear tarea -->
+    <section>
+    </section>
+
+    <!-- Sección estudio pomodoro -->
+    <section id="pomodoro" class="hidden">
+      <div>
+        <nav>
+          <button class="back-button">
+            <img src="src/assets/back-arrow-navigation.svg" alt="Volver">
+          </button>
+        </nav>
+
+        <div class="titlle-logo">
+          <div class="app-icon">
+            <img src="public/images/StudyFlow-logo.png" alt="Logo de StudyFlow">
+            <h2>Estudio Pomodoro</h2>
+          </div>
+        </div>
+
+        <div class="timer-settings">
+          <div class="outter-circle">
+            <div class="inner-circle">
+              <span id="timer">25:00</span>
+              <span>min</span>
+            </div>
+          </div>
+          <button class="settings-button">
+            <img src="src/assets/settings.svg" alt="Configuración">
+          </button>
+        </div>
+
+        <div class="buttons">
+          <!-- Campo repeticiones -->
+          <input type="number" id="repetitions" class="repetitions" placeholder="Repeticiones" min="1" value="1">
+          <!-- Botón iniciar -->
+          <button class="button button-primary" id="start">Iniciar</button>
+          <!-- Botón pausar -->
+          <button class="button button-secondary" id="pause">Pausar</button>
+        </div>
+
+        <footer>
+          <div class="streak">
+            <p>RACHA POMODORO: <var>días</var> <img src="src/assets/fire.svg" alt="Fuego"></p>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
