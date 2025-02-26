@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyFlow - Pomodoro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #E4F2EF;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #44464D;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .back-button {
+            position: absolute;
+            left: 0;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+            color: #44464D;
+        }
+
+        .app-title {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .app-icon {
+            width: 48px;
+            height: 48px;
+            background-color: #2AD4C0;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .timer-container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            margin: 20px 0;
+        }
+
+        .timer-circle {
+            width: 100%;
+            height: 100%;
+            background-color: #748C9E;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: #E4F2EF;
+        }
+
+        .settings-button {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            color: #44464D;
+        }
+
+        .repetitions {
+            background-color: #AEF2B9;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #44464D;
+        }
+
+        .button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px 0;
+            transition: opacity 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .button-primary {
+            background-color: #2AD4C0;
+            color: #44464D;
+        }
+
+        .button-primary:hover:not(:disabled) {
+            background-color: #1fc0ae;
+        }
+
+        .button-secondary {
+            background-color: #748C9E;
+            color: #E4F2EF;
+        }
+
+        .button-secondary:hover:not(:disabled) {
+            background-color: #67798a;
+        }
+
+        .streak {
+            margin-top: auto;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            color: #44464D;
+        }
+
+        /* Estilos para el modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(68, 70, 77, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+        }
+
+        .modal {
+            background-color: #E4F2EF;
+            padding: 20px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 320px;
+            box-shadow: 0 2px 10px rgba(68, 70, 77, 0.1);
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #44464D;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            color: #44464D;
+        }
+
+        .settings-group {
+            margin-bottom: 20px;
+        }
+
+        .settings-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #44464D;
+        }
+
+        .settings-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #748C9E;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #44464D;
+            background-color: #E4F2EF;
+        }
+
+        .save-settings {
+            width: 100%;
+            padding: 12px;
+            background-color: #2AD4C0;
+            color: #44464D;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .save-settings:hover {
+            background-color: #1fc0ae;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button class="back-button">←</button>
+            <div class="app-title">
+                <div class="app-icon">💡</div>
+                <h1>StudyFlow</h1>
+                <h2>Estudio Pomodoro</h2>
+            </div>
+        </header>
+
+        <div class="timer-container">
+            <div class="timer-circle">
+                <span id="timer">25:00</span>
+                <span>min</span>
+            </div>
+            <button class="settings-button">⚙️</button>
+        </div>
+
+        <div class="repetitions">
+            Repeticiones: <span id="repetitions">1</span>
+        </div>
+
+        <button class="button button-primary" id="startButton">Iniciar</button>
+        <button class="button button-secondary" id="stopButton">Detener</button>
+
+        <div class="streak">
+            RACHA POMODORO: <span id="streak">12</span> DÍAS 🔥
+        </div>
+    </div>
+
+    <!-- Modal de configuración -->
+    <div class="modal-overlay" id="settingsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">Configuración</span>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <div class="settings-group">
+                <label class="settings-label" for="studyTime">
+                    Tiempo de estudio (minutos)
+                </label>
+                <input 
+                    type="number" 
+                    id="studyTime" 
+                    class="settings-input" 
+                    min="1" 
+                    max="60" 
+                    value="25"
+                >
+            </div>
+            <div class="settings-group">
+                <label class="settings-label" for="breakTime">
+                    Tiempo de descanso (minutos)
+                </label>
+                <input 
+                    type="number" 
+                    id="breakTime" 
+                    class="settings-input" 
+                    min="1" 
+                    max="30" 
+                    value="5"
+                >
+            </div>
+            <button class="save-settings" id="saveSettings">
+                Guardar cambios
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Configuración inicial y variables
+        const DEFAULT_STUDY_TIME = 25;
+        const DEFAULT_BREAK_TIME = 5;
+
+        let isRunning = false;
+        let timer = null;
+        let repetitions = 1;
+        let isBreakTime = false;
+
+        // Cargar configuración guardada o usar valores por defecto
+        let studyDuration = parseInt(localStorage.getItem('studyDuration')) || DEFAULT_STUDY_TIME;
+        let breakDuration = parseInt(localStorage.getItem('breakDuration')) || DEFAULT_BREAK_TIME;
+        let timeLeft = studyDuration * 60;
+
+        // Elementos del DOM
+        const timerDisplay = document.getElementById('timer');
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const settingsModal = document.getElementById('settingsModal');
+        const closeModal = document.getElementById('closeModal');
+        const saveSettings = document.getElementById('saveSettings');
+        const studyTimeInput = document.getElementById('studyTime');
+        const breakTimeInput = document.getElementById('breakTime');
+        const repetitionsDisplay = document.getElementById('repetitions');
+
+        // Funciones de utilidad
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function resetTimer() {
+            timeLeft = studyDuration * 60;
+            isBreakTime = false;
+            updateTimerDisplay();
+        }
+
+        // Funciones principales
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                startButton.disabled = true;
+                stopButton.disabled = false;
+
+                timer = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    
+                    if (timeLeft === 0) {
+                        clearInterval(timer);
+                        isRunning = false;
+                        
+                        if (!isBreakTime) {
+                            // Cambiar a tiempo de descanso
+                            isBreakTime = true;
+                            timeLeft = breakDuration * 60;
+                            repetitions++;
+                            repetitionsDisplay.textContent = repetitions;
+                            alert('¡Tiempo de estudio completado! Comienza el descanso.');
+                        } else {
+                            // Volver a tiempo de estudio
+                            isBreakTime = false;
+                            timeLeft = studyDuration * 60;
+                            alert('¡Descanso completado! Volvemos al estudio.');
+                        }
+                        
+                        updateTimerDisplay();
+                        startButton.disabled = false;
+                    }
+                }, 1000);
+            }
+        }
+
+        function stopTimer() {
+            if (isRunning) {
+                clearInterval(timer);
+                isRunning = false;
+                resetTimer();
+                startButton.disabled = false;
+                stopButton.disabled = true;
+            }
+        }
+
+        // Funcionalidad del modal
+        function openModal() {
+            settingsModal.style.display = 'flex';
+            setTimeout(() => settingsModal.classList.add('active'), 10);
+            studyTimeInput.value = studyDuration;
+            breakTimeInput.value = breakDuration;
+        }
+
+        function closeModal() {
+            settingsModal.classList.remove('active');
+            setTimeout(() => settingsModal.style.display = 'none', 300);
+        }
+
+        function saveSettings() {
+            const newStudyTime = parseInt(studyTimeInput.value);
+            const newBreakTime = parseInt(breakTimeInput.value);
+
+            if (newStudyTime > 0 && newBreakTime > 0) {
+                studyDuration = newStudyTime;
+                breakDuration = newBreakTime;
+                
+                // Guardar en localStorage
+                localStorage.setItem('studyDuration', studyDuration);
+                localStorage.setItem('breakDuration', breakDuration);
+                
+                // Si el timer no está corriendo, actualizar el tiempo mostrado
+                if (!isRunning) {
+                    resetTimer();
+                }
+                
+                closeModal();
+            } else {
+                alert('Por favor, ingresa valores válidos mayores a 0');
+            }
+        }
+
+        // Event Listeners
+        document.querySelector('.settings-button').addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModal);
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) closeModal();
+        });
+        saveSettings.addEventListener('click', saveSettings);
+        startButton.addEventListener('click', startTimer);
+        stopButton.addEventListener('click', stopTimer);
+        document.querySelector('.back-button').addEventListener('click', () => {
+            console.log('Back button clicked');
+        });
+
+        // Inicialización
+        stopButton.disabled = true;
+        studyTimeInput.value = studyDuration;
+        breakTimeInput.value = breakDuration;
+        updateTimerDisplay();
+    </script>
+</body>
+</html>

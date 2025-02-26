@@ -1,0 +1,32 @@
+footer {
+    text-align: center;
+    position: relative;
+    margin-top: 20px;
+    padding: 10px;
+    margin-bottom: 0;
+  
+    .streak {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-weight: bold;
+      color: $success-light;
+      background-color: $text-light;
+      border-radius: 20px 20px 0px 0px;
+  
+      img {
+        width: 20px;
+      }
+    }
+  }
+  
+  // Responsive
+  @media (max-width: $mobile) {
+    footer {
+      .streak {
+        font-size: 14px;
+      }
+    }
+  }
+  

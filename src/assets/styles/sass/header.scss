@@ -1,0 +1,18 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .back-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+  
+      img {
+        width: 20px;
+      }
+    }
+}

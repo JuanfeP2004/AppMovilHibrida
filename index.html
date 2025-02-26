@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Studyflow</title>
   <script src="js/navegation.js" defer></script>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="src\assets\styles\css\styles.css">
 </head>
 
 <body>
   <main>
     <!-- Sección de Inicio de Sesión -->
-    <section id="inicioSesion" class="active">
+    <section id="inicioSesion" class="hidden">
       <header>
         <div>
           <img src="public\images\StudyFlow-logo.png" alt="Logo de StudyFlow">
@@ -63,68 +63,7 @@
 
     <!-- Sección de la vista ver hoy -->
     <section id="verHoy" class="hidden">
-      <header>
-        <div>
-          <img src="img/backToLogin.png" alt="">
-        </div>
-      </header>
-      <nav>
-        <div>
-          <div><a href="">Hoy</a></div>
-          <div><a href="">Calendario</a></div>
-          <div><a href="">Pomodoro</a></div>
-          <div><a href="crearTarea.html">+</a></div>
-        </div>
-      </nav>
-      <div>
-        <div>
-          <p>Lunes</p>
-          <h2>17 Febrero</h2>
-        </div>
-        <div>
-          <h3>6:50 AM</h3>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div>
-            <h2>
-              Parcial #1 Algebra Lineal
-            </h2>
-          </div>
-          <div>
-            <ul>
-              <li>
-                <p>Unidades 3 - 5</p>
-              </li>
-              <li>
-                <p>8:00 AM</p>
-              <li>
-                <p>20%</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div>
-          <div>
-            <h2>
-              Exposición Arquitectura de computadores
-            </h2>
-          </div>
-          <div>
-            <ul>
-              <li>
-                <p>Arq. RISC y CISC</p>
-              </li>
-              <li>
-                <p>14:00 PM</p>
-              <li>
-                <p>10%</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      
     </section>
 
     <!-- Sección de la vista calendario -->
@@ -136,15 +75,15 @@
     </section>
 
     <!-- Sección estudio pomodoro -->
-    <section id="pomodoro" class="hidden">
-      <div>
-        <nav>
+    <section id="pomodoro" class="active">
+      <div class="pomodoro-container">
+        <header>
           <button class="back-button">
             <img src="src/assets/back-arrow-navigation.svg" alt="Volver">
           </button>
-        </nav>
+        </header>
 
-        <div class="titlle-logo">
+        <div class="title-logo">
           <div class="app-icon">
             <img src="public/images/StudyFlow-logo.png" alt="Logo de StudyFlow">
             <h2>Estudio Pomodoro</h2>
@@ -165,7 +104,7 @@
 
         <div class="buttons">
           <!-- Campo repeticiones -->
-          <input type="number" id="repetitions" class="repetitions" placeholder="Repeticiones" min="1" value="1">
+          <input type="number" id="repetitions" class="repetitions" placeholder="Repeticiones" min="1">
           <!-- Botón iniciar -->
           <button class="button button-primary" id="start">Iniciar</button>
           <!-- Botón pausar -->
