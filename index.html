@@ -272,17 +272,17 @@
         <h2>Crear Nueva Tarea</h2>
         <div>
             <form action="">
-                <select name="tipo" id="">
-                    <option value="0">Tipo</option>
-                    <option value="1">Tarea</option>
-                    <option value="2">Estudio</option>
-                    <option value="3">Examen</option>
+                <select name="tipo" id="tipo">
+                    <option value="Default">Tipo</option>
+                    <option value="Tarea">Tarea</option>
+                    <option value="Estudio">Estudio</option>
+                    <option value="Examen">Examen</option>
                 </select>
-                <input type="text" name="nombre" placeholder="Titulo">
-                <input type="datetime-local" name="fecha" id="">
-                <input type="text" name="descripcion" placeholder="Valor">
-                <button class="navButton" data-page="verHoy">Cancelar</button>
-                <button class="navButton" data-page="verHoy">Crear</button>
+                <input type="text" name="nombre" placeholder="Titulo" id="titulo">
+                <input type="datetime-local" name="fecha" id="fecha">
+                <input type="text" name="descripcion" placeholder="Valor" id="valor">
+                <button class="navButton" data-page="verHoy" id="cancelarTarea">Cancelar</button>
+                <button class="navButton" data-page="crearTarea" id="crearTarea">Crear</button>
             </form>
         </div>
     </main>
