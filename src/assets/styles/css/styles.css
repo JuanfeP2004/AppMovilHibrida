@@ -283,5 +283,61 @@ footer .streak img {
     width: 95%;
   }
 }
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #E4F2EF;
+  color: #44464D;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: "Montserrat", sans-serif;
+  border: 2px solid #748C9E;
+  width: 90%;
+  max-width: 400px;
+}
+.popup button {
+  background: #2AD4C0;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+.popup button:hover {
+  background: rgb(33.5669291339, 169.4330708661, 153.4488188976);
+}
+
+.dark-mode .popup {
+  background: #22262B;
+  color: #E4F2EF;
+  border: 2px solid #55687A;
+}
+.dark-mode .popup button {
+  background: #1A9F90;
+}
+.dark-mode .popup button:hover {
+  background: rgb(33.1675675676, 202.8324324324, 183.6972972973);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 480px) {
+  .popup {
+    width: 95%;
+  }
+}
 
 /*# sourceMappingURL=styles.css.map */

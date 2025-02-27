@@ -113,7 +113,7 @@
 
         <footer>
           <div class="streak">
-            <p>RACHA POMODORO: <var>días</var> <img src="src/assets/fire.svg" alt="Fuego"></p>
+            <p>RACHA POMODORO: <var id="strikeDays">x</var> días <img src="src/assets/fire.svg" alt="Fuego"></p>
           </div>
         </footer>
       </div>
@@ -129,7 +129,7 @@
       </div>
       <div class="settings-group">
         <label class="settings-label" for="studyTime">Tiempo de estudio (max. 60 minutos)</label>
-        <input type="number" id="studyTime" class="settings-input" min="1" max="60" value="25">
+        <input type="number" id="studyTime" class="settings-input" min="10" max="60" value="25">
       </div>
       <div class="settings-group">
         <label class="settings-label" for="breakTime">Tiempo de descanso (max. 30 minutos)</label>
@@ -142,6 +142,16 @@
       <button class="save-settings" id="saveSettings">Guardar cambios</button>
     </div>
   </div>
+
+  <!-- Popup de notificación -->
+  <div id="popupNotification" class="popup hidden">
+    <p id="popupMessage"></p>
+    <button id="closePopup">Cerrar</button>
+  </div>
+
+  <!-- Sonido alarma pomodoro -->
+  <audio id="alarmSound" src="src\assets\pomo-alarm.mp3"></audio>
+
 
   <script src="src\js\main.js" type="module" defer></script>
 
