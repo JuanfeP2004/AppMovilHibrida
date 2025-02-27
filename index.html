@@ -63,7 +63,7 @@
 
     <!-- Sección de la vista ver hoy -->
     <section id="verHoy" class="hidden">
-      
+
     </section>
 
     <!-- Sección de la vista calendario -->
@@ -93,22 +93,22 @@
         <div class="timer-settings">
           <div class="outter-circle">
             <div class="inner-circle">
-              <span id="timer">25:00</span>
+              <span id="timer"></span>
               <span>min</span>
             </div>
           </div>
-          <button class="settings-button">
+          <button class="settings-button" id="openSettings">
             <img src="src/assets/settings.svg" alt="Configuración">
           </button>
         </div>
 
         <div class="buttons">
-          <!-- Campo repeticiones -->
-          <input type="number" id="repetitions" class="repetitions" placeholder="Repeticiones" min="1">
           <!-- Botón iniciar -->
           <button class="button button-primary" id="start">Iniciar</button>
           <!-- Botón pausar -->
           <button class="button button-secondary" id="pause">Pausar</button>
+          <!-- Botón restablecer -->
+          <button class="button button-secondary" id="reset">Restablecer</button>
         </div>
 
         <footer>
@@ -119,5 +119,32 @@
       </div>
     </section>
   </main>
+
+  <!-- Modal de configuración (fuera de la sección) -->
+  <div class="modal-overlay hidden" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Configuración Pomodoro</span>
+        <button class="close-modal" id="closeModal">&times;</button>
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="studyTime">Tiempo de estudio (max. 60 minutos)</label>
+        <input type="number" id="studyTime" class="settings-input" min="1" max="60" value="25">
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="breakTime">Tiempo de descanso (max. 30 minutos)</label>
+        <input type="number" id="breakTime" class="settings-input" min="1" max="30" value="5">
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="repetitionsCount">Número de repeticiones (max. 10)</label>
+        <input type="number" id="repetitionsCount" class="settings-input" min="1" max="10" value="4">
+      </div>
+      <button class="save-settings" id="saveSettings">Guardar cambios</button>
+    </div>
+  </div>
+
+  <script src="src\js\main.js" type="module" defer></script>
+
 </body>
+
 </html>

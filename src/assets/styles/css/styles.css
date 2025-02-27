@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap");
 body {
   font-family: "Montserrat", sans-serif;
   background-color: #E4F2EF;
@@ -135,6 +136,10 @@ header .back-button img {
 #pomodoro .timer-settings .settings-button img {
   width: 20px;
 }
+#pomodoro .timer-settings .settings-button:active {
+  transition: transform 2s;
+  transform: rotate(270deg);
+}
 #pomodoro .buttons {
   margin-top: 20px;
   display: flex;
@@ -142,7 +147,7 @@ header .back-button img {
   align-items: center;
   gap: 20px;
 }
-#pomodoro .buttons button, #pomodoro .buttons input {
+#pomodoro .buttons .button {
   width: 75%;
   height: 20%;
 }
@@ -185,6 +190,97 @@ footer .streak img {
 @media (max-width: 480px) {
   footer .streak {
     font-size: 14px;
+  }
+}
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background: #E4F2EF;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #44464D;
+  border-bottom: 1px solid #748C9E;
+  padding-bottom: 10px;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #748C9E;
+  transition: color 0.3s ease;
+}
+.close-modal:hover {
+  color: #2AD4C0;
+}
+
+.settings-group {
+  margin: 15px 0;
+  text-align: left;
+}
+.settings-group .settings-label {
+  font-weight: bold;
+  color: #44464D;
+  display: block;
+  margin-bottom: 5px;
+}
+.settings-group .settings-input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #748C9E;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.save-settings {
+  background: #2AD4C0;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+.save-settings:hover {
+  background: rgb(33.5669291339, 169.4330708661, 153.4488188976);
+}
+
+@media (max-width: 480px) {
+  .modal {
+    width: 95%;
   }
 }
 
