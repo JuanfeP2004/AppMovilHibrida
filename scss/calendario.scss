@@ -1,0 +1,85 @@
+@use "variables" as v;
+
+.calendario {
+  background-color: v.$back-color;
+}
+
+.header {
+    display: flex;
+    align-items: right;
+    padding: 10px;
+}
+
+.header-button {
+    width: 1rem;
+    height: 1rem;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+.nav-button {
+    background-color: v.$button-color;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.nav-button-select {
+    background-color: v.$hover-color;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.nav-button-t {
+    background-color: v.$button-color;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.nav-button-text {
+    font-size: 1rem;
+    color: #000;
+    text-decoration: none;
+}
+
+.month-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+.month-nav-text {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    font-style: normal;
+    text-align: center;
+    color: #000;
+    text-decoration: none;
+    flex-grow: 1;
+}
+
+.month-nav-text-select {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.month-nav-select {
+    font-size: 1.6rem;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    color: v.$hover-color;
+    text-decoration: none;
+}
+
+.month-calendar {
+    background-color: v.$section-color;
+    border-radius: 25px 25px 0 0;
+    min-height: 600px;
+    padding: 10px;
+}

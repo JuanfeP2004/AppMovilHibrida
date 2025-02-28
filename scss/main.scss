@@ -1,6 +1,13 @@
+@use 'variables' as v;
+
+@use 'calendario';
+
 body {
-    background-color: #f0f0f0;
+    background-color: v.$back-color;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+
+    min-width: 320px;
+    max-width: 390px;
 }

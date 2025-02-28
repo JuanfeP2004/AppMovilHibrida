@@ -127,28 +127,29 @@
     </main>
 
     <main class="calendario">
-        <div>
-            <img src="img/backToLogin.svg" alt="" class="navButton" data-page="inicioSesion">
+        <div class="header">
+            <img src="img/backToLogin.svg" alt="" class="header-button navButton" data-page="inicioSesion">
         </div>
-        <div>
-            <div><a href="" class="navButton" data-page="verHoy">Hoy</a></div>
-            <div><a href="" class="navButton" data-page="calendario">Calendario</a></div>
-            <div><a href="" class="navButton" data-page="pomodoro">Pomodoro</a></div>
-            <div><a href="" class="navButton" data-page="crearTarea">+</a></div>
+        <div class="nav">
+            <div class="nav-button"><a href="" class="nav-button-text navButton" data-page="verHoy">Hoy</a></div>
+            <div class="nav-button-select"><a href="" class="nav-button-text navButton" data-page="calendario">Calendario</a></div>
+            <div class="nav-button"><a href="" class="nav-button-text navButton" data-page="pomodoro">Pomodoro</a></div>
+            <div class="nav-button-t"><a href="" class="nav-button-text navButton" data-page="crearTarea">+</a></div>
         </div>
 
-        <div>
-            <p id="month-bf-text">Mes anterior</p>
-            <p>
-                <em id="month-bf">&lt;</em> 
-                <em id="month-text">Mes</em> 
-                <em id="month-af">&gt;</em> 
+        <div class="month-nav">
+            <p id="month-bf-text" class="month-nav-text">Mes anterior</p>
+            <p class="month-nav-text-select">
+                <em id="month-bf" class="month-nav-select">&lt;</em> 
+                <em id="month-text" class="month-nav-select">Mes</em> 
+                <em id="month-af" class="month-nav-select">&gt;</em> 
             </p>
-            <p id="month-af-text">Mes Posterior</p>
+            <p id="month-af-text" class="month-nav-text">Mes Posterior</p>
         </div>
-        <div id="month-calendar">
-            <div>
-                <div>
+
+        <div id="month-calendar" class="month-calendar">
+            <div class="day-container">
+                <div id="">
                     <p>Lunes <em>17</em></p>
                 </div>
                 <div>
