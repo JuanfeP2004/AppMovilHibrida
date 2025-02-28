@@ -51,6 +51,7 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px;
+    margin-top: 30px;
 }
 
 .month-nav-text {
@@ -81,5 +82,105 @@
     background-color: v.$section-color;
     border-radius: 25px 25px 0 0;
     min-height: 600px;
+    padding: 20px 10px;
+}
+
+.day-calendar {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+
+    background-color: v.$item-color;
+    border-radius: 10px;
+    padding: 5px 5px;
+
+    height: 120px;
+    margin: 10px 0px;
+}
+
+.day-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 25%;
+}
+
+.day-text-text {
+
+}
+
+.day-month {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+}
+
+.day-tasks {
+    
     padding: 10px;
+    width: 50%;
+}
+
+.day-tasks-list {
+    list-style-type: none;
+    overflow-x: scroll;
+    display: flex;
+    padding: 0;
+    
+}
+
+.day-create {
+    
+    width: 25%;
+}
+
+
+.task {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 5px;
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 5px;
+
+    border-left: #fff 1px solid;
+    border-right: #fff 1px solid;
+}
+
+.task-date {
+    text-decoration: none;
+}
+
+.task-name {
+    text-overflow: ellipsis;
+}
+
+.task-value {
+
+}
+
+.day-create {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.day-create-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: v.$button-color;
+    border-radius: 50%;
+    padding: 10px;
+    height: 30px;
+    width: 30px;
 }

@@ -2,11 +2,18 @@
 
 @use 'calendario';
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: v.$back-color;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 
     min-width: 320px;
     max-width: 390px;
