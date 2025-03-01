@@ -167,6 +167,72 @@
   width: 30px;
 }
 
+.crearTarea {
+  background-color: #E4F2EF;
+  text-align: center;
+}
+
+.crearTarea-logo {
+  width: 100px;
+  height: 100px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+
+.crearTarea-titulo {
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.crearTarea-form {
+  background-color: #2AD4C0;
+  border-radius: 15px 15px 0 0;
+  min-height: 400px;
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.crearTarea-inputs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.crearTarea-input {
+  background-color: #44464D;
+  color: #fff;
+  width: 70%;
+  margin: 10px;
+  padding: 5px 10px;
+  border-radius: 15px;
+  border: none;
+}
+
+.texto-error {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.crearTarea-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.crearTarea-button {
+  all: unset;
+  background-color: #AEF2B9;
+  border-radius: 15px;
+  padding: 10px;
+  width: 30%;
+}
+
 * {
   margin: 0;
   padding: 0;
