@@ -1,3 +1,5 @@
+import Navegacion from "./navegation.js";
+
 class Calendario {
 
     actividades = [
@@ -78,7 +80,9 @@ class Calendario {
 
             tareas_por_dia = [];
             is_first = true;
+            let arrayObj = [];
             let ul;
+            let div;
 
             objects.forEach(obj => {
 
@@ -91,12 +95,15 @@ class Calendario {
             if(tareas_por_dia.length > 0){
 
                 this.ordenarTareasPorHora(tareas_por_dia);
-                ul = this.crearContendorDia(ul, tareas_por_dia[0]);
-                
+                arrayObj = this.crearContendorDia(ul, tareas_por_dia[0]);
+                ul = arrayObj[0];
+                div = arrayObj[1];
+
                 tareas_por_dia.forEach(obj => {
                     this.crearTarea(ul, obj);
                 });
                 
+                this.crearBotonAgregar(div);
             }           
         }
     }    
@@ -107,37 +114,61 @@ class Calendario {
 
     crearContendorDia(ul, obj) {
         let day = document.createElement('div');
+        day.classList.add('day-calendar');
         let titleContainer = document.createElement('div');
+        titleContainer.classList.add('day-text');
         let dayTitle = document.createElement('p');
-        dayTitle.innerHTML = this.dias[obj.fecha.getDay()] + " <em>" + obj.fecha.getDate() + "</em>";
+        dayTitle.classList.add('day-text-text');
+        dayTitle.innerHTML = this.dias[obj.fecha.getDay()] + " <br><em class='day-month'>" + obj.fecha.getDate() + "</em>";
         titleContainer.appendChild(dayTitle);
         day.appendChild(titleContainer);
         this.calendario.appendChild(day);
 
         let div = document.createElement('div');
+        div.classList.add('day-tasks');
         ul = document.createElement('ul');
+        ul.classList.add('day-tasks-list');
 
         div.appendChild(ul);
         day.appendChild(div);
         
-        return ul;
+        return [ul, day];
     }
 
     crearTarea(ul, obj){
         let li = document.createElement('li');
+        li.classList.add('task');
 
         let titletype = document.createElement('p');
+        titletype.classList.add('task-text');
         titletype.innerHTML = obj.tipo + ": " + obj.titulo;
         let fecha = document.createElement('p');
+        fecha.classList.add('task-date');
         fecha.innerHTML = ((obj.fecha.getHours()<10)? "0" + obj.fecha.getHours() : obj.fecha.getHours()) + ":" + 
             ((obj.fecha.getMinutes() < 10)? "0" + obj.fecha.getMinutes() : obj.fecha.getMinutes());
         let valor = document.createElement('p');
+        valor.classList.add('task-value');
         valor.innerHTML = obj.valor + "%";
 
-        li.appendChild(titletype);
         li.appendChild(fecha);
+        li.appendChild(titletype);
         li.appendChild(valor);
         ul.appendChild(li);
+    }
+
+    crearBotonAgregar(divTask){
+
+        //Arreglar el boton de agregar tarea
+
+        let div = document.createElement('div');
+        div.classList.add('day-create');
+        let button = document.createElement('div');
+        button.classList.add('day-create-button', 'navButton');
+        button.innerHTML = "<a href='' class='nav-button-text'>+</a>";
+        button.addEventListener('click', this.navegacion.cambiarPagina.bind(this.navegacion));
+        button.setAttribute('data-page', 'crearTarea');
+        div.appendChild(button);
+        divTask.appendChild(div);
     }
 
     constructor() {
@@ -146,6 +177,7 @@ class Calendario {
 
         this.anio_actual = new Date().getFullYear();
         this.mes_actual = new Date().getMonth();
+        this.navegacion = new Navegacion();
 
         this.month = document.getElementById('month-text');
         this.month_before = document.getElementById('month-bf-text');
