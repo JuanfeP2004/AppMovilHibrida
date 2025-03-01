@@ -31,4 +31,16 @@ class Auth {
         alert('Usuario o contraseña incorrectos.');
         return false;
     }
+
+    cerrarSesion() {
+        localStorage.removeItem('usuarioActual');
+        this.usuarioActual = null;
+        alert('Sesión cerrada correctamente.');
+    }
+
+    estaAutenticado() {
+        return localStorage.getItem('usuarioActual') !== null;
+    }
 }
+
+export default Auth;
