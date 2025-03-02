@@ -1,3 +1,5 @@
+import Tarea from '../data/tarea.js';
+
 class CrearTarea {
 
     refnombre;
@@ -66,16 +68,15 @@ class CrearTarea {
         let fecha = this.reffecha.value;
         let tipo = this.reftipo.value;
 
-        let tarea = {
-            nombre: nombre,
-            valor: valor,
-            fecha: fecha,
-            tipo: tipo
-        };
+        let userLS = JSON.parse(localStorage.getItem(this.user));
+        
+        let tarea = new Tarea(nombre, tipo, fecha, valor);
+        userLS.tareas.push(tarea);
 
-        alert('Tarea creada correctamente' + "\n" + 'Nombre: ' + tarea.nombre + "\n" + 'Valor: ' + tarea.valor + "\n" + 'Fecha: ' + tarea.fecha + "\n" + 'Tipo: ' + tarea.tipo);
+        localStorage.setItem(this.user, JSON.stringify(userLS));
+
+        alert('Tarea creada correctamente' + "\n" + 'Nombre: ' + tarea.titulo + "\n" + 'Valor: ' + tarea.valor + "\n" + 'Fecha: ' + tarea.fecha + "\n" + 'Tipo: ' + tarea.tipo);
     }
-
     cancelarTarea() {
         this.refnombre.value = '';
         this.refnombre.placeholder = 'Titulo';
@@ -87,13 +88,15 @@ class CrearTarea {
         this.referrortipo.innerHTML = '';
     }
 
-    constructor() {
+    constructor(user) {
         this.refnombre = document.getElementById('titulo');
         this.refvalor = document.getElementById('valor');
         this.reffecha = document.getElementById('fecha');
         this.reftipo = document.getElementById('tipo');
         this.referrorfecha = document.getElementById('error-fecha');
-        this.referrortipo = document.getElementById('error-tipo'); 
+        this.referrortipo = document.getElementById('error-tipo');
+
+        this.user = user;
 
         document.getElementById('crearTarea').addEventListener('click', this.crearTarea.bind(this));
         document.getElementById('cancelarTarea').addEventListener('click', this.cancelarTarea.bind(this));
