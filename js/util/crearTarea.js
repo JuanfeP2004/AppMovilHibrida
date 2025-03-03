@@ -74,8 +74,13 @@ class CrearTarea {
         userLS.tareas.push(tarea);
 
         localStorage.setItem(this.user, JSON.stringify(userLS));
-
-        alert('Tarea creada correctamente' + "\n" + 'Nombre: ' + tarea.titulo + "\n" + 'Valor: ' + tarea.valor + "\n" + 'Fecha: ' + tarea.fecha + "\n" + 'Tipo: ' + tarea.tipo);
+        this.calendario.calendario.innerHTML = '';
+        this.calendario.mes_actual = new Date(fecha).getMonth()
+        this.calendario.anio_actual = new Date(fecha).getFullYear();
+        this.calendario.ponerMes(new Date(fecha).getMonth());
+        this.calendario.ponerTareas(this.user, new Date(fecha).getMonth(), new Date(fecha).getFullYear());
+        this.cancelarTarea();
+        this.navegacion.cambiarPaginaString("calendario");
     }
     cancelarTarea() {
         this.refnombre.value = '';
@@ -88,7 +93,7 @@ class CrearTarea {
         this.referrortipo.innerHTML = '';
     }
 
-    constructor(user) {
+    constructor(user, calendario, navegacion) {
         this.refnombre = document.getElementById('titulo');
         this.refvalor = document.getElementById('valor');
         this.reffecha = document.getElementById('fecha');
@@ -97,6 +102,8 @@ class CrearTarea {
         this.referrortipo = document.getElementById('error-tipo');
 
         this.user = user;
+        this.calendario = calendario;
+        this.navegacion = navegacion;
 
         document.getElementById('crearTarea').addEventListener('click', this.crearTarea.bind(this));
         document.getElementById('cancelarTarea').addEventListener('click', this.cancelarTarea.bind(this));

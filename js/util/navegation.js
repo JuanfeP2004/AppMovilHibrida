@@ -38,6 +38,16 @@ class Navegacion {
             }
         });
     }
+
+    cambiarPaginaString(parametro){
+        this.paginas.forEach(pagina => {
+            if(pagina.nombre === parametro){
+                pagina.ref.style.display = 'block';
+            } else {
+                pagina.ref.style.display = 'none';
+            }
+        });
+    }
 }
 
 export default Navegacion;

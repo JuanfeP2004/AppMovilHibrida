@@ -32,13 +32,11 @@ let user = new User("Juan", "12345678", 0, actividades);
 localStorage.setItem('Juan', JSON.stringify(user));
 
 let nav = new Navegacion();
-let crearTarea = new CrearTarea('Juan');
 let calendario = new Calendario(nav, 'Juan');
+let crearTarea = new CrearTarea('Juan', calendario, nav);
 
 document.addEventListener('DOMContentLoaded', () => {
     nav.paginaInicial();
     calendario.ponerMes(new Date().getMonth()); 
     calendario.ponerTareas(user.name, new Date().getMonth(), new Date().getFullYear());
 });
-
-setInterval(() => calendario.ponerTareas(user.name, new Date().getMonth(), new Date().getFullYear()), 60000);

@@ -97,9 +97,17 @@ class Calendario {
         let titleContainer = document.createElement('div');
         titleContainer.classList.add('day-text');
         let dayTitle = document.createElement('p');
-        dayTitle.classList.add('day-text-text');
-        dayTitle.innerHTML = this.dias[obj.fecha.getDay()] + " <br><em class='day-month'>" + obj.fecha.getDate() + "</em>";
+        dayTitle.classList.add('day-week');
+        dayTitle.innerHTML = this.dias[obj.fecha.getDay()];
+        let daySeparator = document.createElement('br');
+        let dayNumber = document.createElement('em');
+        dayNumber.classList.add('day-month');
+        dayNumber.innerHTML = obj.fecha.getDate();
+        
         titleContainer.appendChild(dayTitle);
+        titleContainer.appendChild(daySeparator);
+        titleContainer.appendChild(dayNumber);
+
         day.appendChild(titleContainer);
         this.calendario.appendChild(day);
 

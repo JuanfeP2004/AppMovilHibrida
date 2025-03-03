@@ -1,13 +1,17 @@
 @use "variables" as v;
 
 .calendario {
-  background-color: v.$back-color;
+    background-color: v.$back-color;
 }
 
 .header {
     display: flex;
     align-items: right;
     padding: 10px;
+
+    position: sticky;
+    top: 0;
+    background-color: v.$back-color;
 }
 
 .header-button {
@@ -20,6 +24,10 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px;
+
+    position: sticky;
+    top: 36px;
+    background-color: v.$back-color;
 }
 
 .nav-button {
@@ -35,9 +43,14 @@
 }
 
 .nav-button-t {
-    background-color: v.$button-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #AEF2B9;
     border-radius: 50%;
-    padding: 10px;
+    text-align: center;
+    height: 38px;
+    width: 38px;
 }
 
 .nav-button-text {
@@ -81,7 +94,7 @@
 .month-calendar {
     background-color: v.$section-color;
     border-radius: 25px 25px 0 0;
-    min-height: 600px;
+    min-height: 80vh;
     padding: 20px 10px;
 }
 
@@ -102,12 +115,16 @@
 .day-text {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: left;
     width: 25%;
 }
 
-.day-text-text {
+.day-week {
+    text-align: left;
+}
 
+.day-text-text {
+    text-align: left;
 }
 
 .day-month {
@@ -158,8 +175,12 @@
     text-decoration: none;
 }
 
-.task-name {
+.task-text {
     text-overflow: ellipsis;
+    height: 40px;
+    max-height: 40px;
+    width: 100%;
+    overflow: hidden;
 }
 
 .task-value {
