@@ -1,290 +1,187 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studyflow</title>
-    <script src="js/main.js" type="module"></script>
-    <link rel="stylesheet" href="css/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studyflow</title>
+  <script src="js/navegation.js" defer></script>
+  <link rel="stylesheet" href="src\assets\styles\css\styles.css">
+  <link rel="shortcut icon" href="public\images\StudyFlow-ico.ico" type="image/x-icon">
 </head>
+
 <body>
-    <main class="inicioSesion">
+  <main>
+    <!-- Sección de Inicio de Sesión -->
+    <section id="inicioSesion" class="hidden">
+      <header>
+        <div>
+          <img src="public\images\StudyFlow-logo.png" alt="Logo de StudyFlow">
+        </div>
+        <h1>Inicio de Sesión</h1>
+      </header>
+
+      <form id="loginForm">
+        <div>
+          <input type="text" id="loginUsername" placeholder="Usuario">
+        </div>
+        <div>
+          <input type="password" id="loginPassword" placeholder="Contraseña">
+        </div>
+        <div>
+          <button type="submit" class="navButton" data-page="verHoy">Ingresar</button>
+        </div>
+        <div>
+          <button type="button" class="navButton" data-page="registro">Crea tu cuenta</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Sección de Registro -->
+    <section id="registro" class="hidden">
+      <header>
+        <div>
+          <img src="public\images\StudyFlow-logo.png" alt="Logo de StudyFlow">
+        </div>
+        <h1>Crea tu cuenta</h1>
+      </header>
+
+      <form id="registerForm">
+        <div>
+          <input type="text" id="registerUsername" placeholder="Usuario">
+        </div>
+        <div>
+          <input type="password" id="registerPassword" placeholder="Contraseña">
+        </div>
+        <div>
+          <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
+        </div>
+        <div>
+          <button type="submit" class="navButton" data-page="inicioSesion">Crear cuenta</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Sección de la vista ver hoy -->
+    <!-- Sección de la vista ver hoy -->
+    <section id="verHoy" class="active">
+      <div class="header">
+        <button class="tab active">Hoy</button>
+        <button class="tab">Calendario</button>
+        <button class="tab">Pomodoro</button>
+        <button id="addTaskBtn" class="add">+</button>
+      </div>
+      <div class="date-time">
+        <div class="date">
+          <p class="day"><var id="dia-semana">miercoles</var></p>
+          <p class="full-date"><var id="fecha-completa">17 Febrero</var></p>
+        </div>
+        <p class="time"><var id="hora-actual">6:50 AM</var></p>
+      </div>
+
+      <!-- Formulario para agregar tareas -->
+      <div id="taskFormContainer" class="hidden">
+        <input type="text" id="taskTitle" placeholder="Título de la tarea">
+        <input type="text" id="taskSubject" placeholder="Materia">
+        <input type="text" id="taskDetails" placeholder="Detalles">
+        <input type="time" id="taskTime">
+        <button id="saveTaskBtn">Guardar</button>
+      </div>
+
+      <!-- Lista de tareas dinámicas -->
+      <div class="tasks" id="tasksContainer"></div>
+    </section>
+
+
+    <!-- Sección de la vista calendario -->
+    <section id="calendario" class="hidden">
+    </section>
+
+    <!-- Sección de la vista crear tarea -->
+    <section id="crearTarea" class="hidden">
+    </section>
+
+    <!-- Sección estudio pomodoro -->
+    <section id="pomodoro" class="hidden">
+      <div class="pomodoro-container">
         <header>
-            <div>
-                <img src="img/logo.png" alt="Logo de StudyFlow">
-            </div>
-            <h1>Inicio de Sesión</h1>
+          <button class="back-button">
+            <img src="src/assets/back-arrow-navigation.svg" alt="Volver">
+          </button>
         </header>
 
-        <form id="loginForm">
-            <div>
-                <input type="text" id="username" placeholder="Usuario">
-            </div>
-            <div>
-                <input type="password" id="password" placeholder="Contraseña">
-            </div>
-            <div>
-                <button type="submit" class="navButton" data-page="verHoy">Ingresar</button>
-            </div>
-            <div>
-                <button type="button" id="registerBtn" class="navButton" data-page="registro">Crea tu cuenta</button>
-            </div>
-        </form>
-    </main>
-
-    <main class="registro">
-        <header>
-            <div>
-                <img src="img/logo.png" alt="Logo de StudyFlow">
-            </div>
-            <h1>Crea tu cuenta</h1>
-        </header>
-
-        <form id="registerForm">
-            <div>
-                <input type="text" id="username" placeholder="Usuario">
-            </div>
-            <div>
-                <input type="password" id="password" placeholder="Contraseña">
-            </div>
-            <div>
-                <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
-            </div>
-            <div>
-                <button type="submit" class="navButton" data-page="inicioSesion">Crear cuenta</button>
-            </div>
-            <div>
-                <button type="button"  id="loginBtn" class="navButton" data-page="inicioSesion">Ya tengo una cuenta</button>
-            </div>
-        </form>
-    </main>
-
-    <main class="verHoy">
-        <header>
-            <div>
-                <img src="img/backToLogin.svg" alt="" class="navButton" data-page="inicioSesion">
-            </div>
-        </header>
-        <nav>
-            <div>
-                <div><a href="" class="navButton" data-page="verHoy">Hoy</a></div>
-                <div><a href="" class="navButton" data-page="calendario">Calendario</a></div>
-                <div><a href="" class="navButton" data-page="pomodoro">Pomodoro</a></div>
-                <div><a href="" class="navButton" data-page="crearTarea">+</a></div>
-            </div>
-        </nav>  
-        <div>
-            <div>
-                <div>
-                    <p>Lunes</p>
-                    <h2>17 Febrero</h2>
-                </div>
-                <div>
-                    <h3>6:50 AM</h3>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <div>
-                        <h2>
-                            Parcial #1 Algebra Lineal
-                        </h2>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>
-                                <p>Unidades 3 - 5</p>
-                            </li>
-                            <li>
-                                <p>8:00 AM</p>
-                            <li>
-                                <p>20%</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <h2>
-                            Exposición Arquitectura de computadores
-                        </h2>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>
-                                <p>Arq. RISC y CISC</p>
-                            </li>
-                            <li>
-                                <p>14:00 PM</p>
-                            <li>
-                                <p>10%</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <main class="calendario">
-        <div>
-            <img src="img/backToLogin.svg" alt="" class="navButton" data-page="inicioSesion">
-        </div>
-        <div>
-            <div><a href="" class="navButton" data-page="verHoy">Hoy</a></div>
-            <div><a href="" class="navButton" data-page="calendario">Calendario</a></div>
-            <div><a href="" class="navButton" data-page="pomodoro">Pomodoro</a></div>
-            <div><a href="" class="navButton" data-page="crearTarea">+</a></div>
+        <div class="title-logo">
+          <div class="app-icon">
+            <img src="public/images/StudyFlow-logo.png" alt="Logo de StudyFlow">
+            <h2>Estudio Pomodoro</h2>
+          </div>
         </div>
 
-        <div>
-            <p>Enero</p>
-            <p><em>&lt;</em> Febrero <em>&gt;</em> </p>
-            <p>Marzo</p>
+        <div class="timer-settings">
+          <div class="outter-circle">
+            <div class="inner-circle">
+              <span id="timer"></span>
+              <span>min</span>
+            </div>
+          </div>
+          <button class="settings-button" id="openSettings">
+            <img src="src/assets/settings.svg" alt="Configuración">
+          </button>
         </div>
-        <div>
-            <div>
-                <div>
-                    <p>Lunes <em>17</em></p>
-                </div>
-                <div>
-                    <ul>
-                        <li>
-                            <p>8:00AM</p>
-                            <p>Parcia #1 Algebra Lineal</p>
-                            <p>20%</p>
-                        </li>
-                        <li>
-                            <p>14:00PM</p>
-                            <p>Exposición Arquitectura de computadores</p>
-                            <p>10%</p>
-                        </li>
-                    </ul> 
-                </div>
-                <div>
-                    <div><a href="">+</a></div>
-                </div>             
-            </div>
-            <div>
-                <div>
-                    <p>Martes <em>18</em></p>
-                </div>
-                <div>
-                    <ul>
-                        <li>
-                            <p>10:00AM</p>
-                            <p>Parcia #1 Estructuras de datos y algoritmos</p>
-                            <p>20%</p>
-                        </li>
-                        <li>
-                            <p>11:59AM</p>
-                            <p>Entrega #1 Contexto Profesional</p>
-                            <p>10%</p>
-                        </li>
-                    </ul> 
-                </div>
-                <div>
-                    <div><a href="">+</a></div>
-                </div>            
-            </div>
-            <div>
-                <div>
-                    <p>Miercoles <em>19</em></p>
-                </div>
-                <div>
-                    <ul>
-                        <li>
-                            <p>12:00PN</p>
-                            <p>Parcia #1 Bases de datos</p>
-                            <p>20%</p>
-                        </li>
-                        <li>
-                            <p>13:00PM</p>
-                            <p></p>
-                            <p></p>
-                        </li>
-                    </ul> 
-                </div>
-                <div>
-                    <div><a href="">+</a></div>
-                </div>             
-            </div>
-            <div>
-                <div>
-                    <p>Jueves <em>20</em></p>
-                </div>
-                <div>
-                    <ul>
-                        <li>
-                            <p>6:00AM</p>
-                            <p></p>
-                            <p></p>
-                        </li>
-                        <li>
-                            <p>7:00AM</p>
-                            <p></p>
-                            <p></p>
-                        </li>
-                    </ul> 
-                </div>  
-                <div>
-                    <div><a href="">+</a></div>
-                </div>            
-            </div>
-        </div>
-    </main>
 
-    <main class="pomodoro">
-        <header>
-            <div>
-                <img src="img/back-arrow-navigation.svg" alt="" class="navButton" data-page="verHoy">
-            </div>
-        </header>
-        <div>
-            <div>
-                <img src="img/logo.png" alt="">
-                <h1>Pomodoro</h1>
-            </div>
-            <div>
-                <div>
-                    <div>
-                        <h2>25:00</h2>
-                        <h3>minutos</h3>
-                    </div>
-                    <div>
-                        <img src="img/settings.svg" alt="">
-                    </div>
-                </div>
-                <div>
-                    <input type="number" placeholder="Repeticiones" required min="1">
-                    <button>Iniciar</button>
-                    <button>Detener</button>
-                </div>
-            </div>
-            <div>
-                <h2>RACHA POMODORO: 12 DÍAS <img src="img/fire.svg" alt=""></h2>
-            </div>
+        <div class="buttons">
+          <!-- Botón iniciar -->
+          <button class="button button-primary" id="start">Iniciar</button>
+          <!-- Botón pausar -->
+          <button class="button button-secondary" id="pause">Pausar</button>
+          <!-- Botón restablecer -->
+          <button class="button button-secondary" id="reset">Restablecer</button>
         </div>
-    </main>
 
-    <main class="crearTarea">
-        <img src="img/logo.png" alt="">
-        <h2>Crear Nueva Tarea</h2>
-        <div>
-            <form action="">
-                <select name="tipo" id="">
-                    <option value="0">Tipo</option>
-                    <option value="1">Tarea</option>
-                    <option value="2">Estudio</option>
-                    <option value="3">Examen</option>
-                </select>
-                <input type="text" name="nombre" placeholder="Titulo">
-                <input type="datetime-local" name="fecha" id="">
-                <input type="text" name="descripcion" placeholder="Valor">
-                <button class="navButton" data-page="verHoy">Cancelar</button>
-                <button class="navButton" data-page="verHoy">Crear</button>
-            </form>
-        </div>
-    </main>
+        <footer>
+          <div class="streak">
+            <p>RACHA POMODORO: <var id="strikeDays">x</var> días <img src="src/assets/fire.svg" alt="Fuego"></p>
+          </div>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de configuración (fuera de la sección) -->
+  <div class="modal-overlay hidden" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Configuración Pomodoro</span>
+        <button class="close-modal" id="closeModal">&times;</button>
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="studyTime">Tiempo de estudio (max. 60 minutos)</label>
+        <input type="number" id="studyTime" class="settings-input" min="10" max="60" value="25">
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="breakTime">Tiempo de descanso (max. 30 minutos)</label>
+        <input type="number" id="breakTime" class="settings-input" min="1" max="30" value="5">
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="repetitionsCount">Número de repeticiones (max. 10)</label>
+        <input type="number" id="repetitionsCount" class="settings-input" min="1" max="10" value="4">
+      </div>
+      <button class="save-settings" id="saveSettings">Guardar cambios</button>
+    </div>
+  </div>
+
+  <!-- Popup de notificación -->
+  <div id="popupNotification" class="popup hidden">
+    <p id="popupMessage"></p>
+    <button id="closePopup">Cerrar</button>
+  </div>
+
+  <!-- Sonido alarma pomodoro -->
+  <audio id="alarmSound" src="src\assets\pomo-alarm.mp3"></audio>
+
+
+  <script type="module" src="src\js\main.js" defer></script>
+
 </body>
+
 </html>
