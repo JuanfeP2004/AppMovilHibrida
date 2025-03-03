@@ -138,7 +138,7 @@ header .back-button img {
 }
 #pomodoro .timer-settings .settings-button:active {
   transition: transform 2s;
-  transform: rotate(270deg);
+  transform: rotate(500deg);
 }
 #pomodoro .buttons {
   margin-top: 20px;
@@ -337,6 +337,69 @@ footer .streak img {
 @media (max-width: 480px) {
   .popup {
     width: 95%;
+  }
+}
+#verHoy {
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+#verHoy .header {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+#verHoy .header .tab, #verHoy .header .add {
+  background: #2AD4C0;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+#verHoy .header .tab:hover, #verHoy .header .add:hover {
+  background: rgb(33.5669291339, 169.4330708661, 153.4488188976);
+}
+#verHoy .header .add {
+  font-size: 20px;
+}
+#verHoy .date-time {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 60px;
+}
+#verHoy .date-time .date .day {
+  font-size: 1.2em;
+}
+#verHoy .date-time .date .full-date {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+#verHoy .date-time .time {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+#verHoy .tasks {
+  margin-top: 20px;
+}
+#verHoy .tasks .task {
+  background: #748C9E;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+#verHoy .tasks .task .title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+#verHoy .tasks .task .subject, #verHoy .tasks .task .details {
+  font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+  #verHoy {
+    padding: 10px;
   }
 }
 

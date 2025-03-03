@@ -7,6 +7,7 @@
   <title>Studyflow</title>
   <script src="js/navegation.js" defer></script>
   <link rel="stylesheet" href="src\assets\styles\css\styles.css">
+  <link rel="shortcut icon" href="public\images\StudyFlow-ico.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -62,9 +63,35 @@
     </section>
 
     <!-- Sección de la vista ver hoy -->
-    <section id="verHoy" class="hidden">
+    <!-- Sección de la vista ver hoy -->
+    <section id="verHoy" class="active">
+      <div class="header">
+        <button class="tab active">Hoy</button>
+        <button class="tab">Calendario</button>
+        <button class="tab">Pomodoro</button>
+        <button id="addTaskBtn" class="add">+</button>
+      </div>
+      <div class="date-time">
+        <div class="date">
+          <p class="day"><var id="dia-semana">miercoles</var></p>
+          <p class="full-date"><var id="fecha-completa">17 Febrero</var></p>
+        </div>
+        <p class="time"><var id="hora-actual">6:50 AM</var></p>
+      </div>
 
+      <!-- Formulario para agregar tareas -->
+      <div id="taskFormContainer" class="hidden">
+        <input type="text" id="taskTitle" placeholder="Título de la tarea">
+        <input type="text" id="taskSubject" placeholder="Materia">
+        <input type="text" id="taskDetails" placeholder="Detalles">
+        <input type="time" id="taskTime">
+        <button id="saveTaskBtn">Guardar</button>
+      </div>
+
+      <!-- Lista de tareas dinámicas -->
+      <div class="tasks" id="tasksContainer"></div>
     </section>
+
 
     <!-- Sección de la vista calendario -->
     <section id="calendario" class="hidden">
@@ -75,7 +102,7 @@
     </section>
 
     <!-- Sección estudio pomodoro -->
-    <section id="pomodoro" class="active">
+    <section id="pomodoro" class="hidden">
       <div class="pomodoro-container">
         <header>
           <button class="back-button">
@@ -153,7 +180,7 @@
   <audio id="alarmSound" src="src\assets\pomo-alarm.mp3"></audio>
 
 
-  <script src="src\js\main.js" type="module" defer></script>
+  <script type="module" src="src\js\main.js" defer></script>
 
 </body>
 

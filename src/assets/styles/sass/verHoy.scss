@@ -1,0 +1,77 @@
+#verHoy {
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+  
+    .header {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+  
+      .tab, .add {
+        background: $primary-light;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 8px;
+        cursor: pointer;
+        
+        &:hover {
+          background: darken($primary-light, 10%);
+        }
+      }
+  
+      .add {
+        font-size: 20px;
+      }
+    }
+  
+    .date-time {
+      display: flex;
+      justify-content: center;
+      margin-top: 15px;
+      gap: 60px;
+  
+      .date {
+        .day {
+          font-size: 1.2em;
+        }
+        .full-date {
+          font-size: 1.5em;
+          font-weight: bold;
+        }
+      }
+  
+      .time {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
+  
+    .tasks {
+      margin-top: 20px;
+  
+      .task {
+        background: $border-light;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+  
+        .title {
+          font-size: 1.2em;
+          font-weight: bold;
+        }
+  
+        .subject, .details {
+          font-size: 0.9em;
+        }
+      }
+    }
+  }
+  
+  // Responsividad
+  @media (max-width: $tablet) {
+    #verHoy {
+      padding: 10px;
+    }
+  }

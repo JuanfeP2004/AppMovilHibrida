@@ -1,3 +1,5 @@
+import { isNewDay, increaseStreak } from './pomodoroStreak.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     // Elementos del DOM
     const settingsButton = document.getElementById('openSettings');
@@ -22,10 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
     let studyDuration = parseInt(localStorage.getItem('studyDuration')) || 25;
     let breakDuration = parseInt(localStorage.getItem('breakDuration')) || 5;
     let totalRepetitions = parseInt(localStorage.getItem('totalRepetitions')) || 4;
+    // Variables del temporizador
     let timeLeft = studyDuration * 60; // Convertimos minutos a segundos
     let timer = null; // Almacena el intervalo
     let cycleCount = 0; // Contador de ciclos
     let isStudyTime = true; // Indica si es tiempo de estudio o descanso
+    //Variales de la racha
+    let firstTime = localStorage.getItem('firstTime') === null ;
+    if(firstTime){
+        //Setear la fecha del primer pomodoro
+        console.log("firstTime:" + firstTime);
+        let lastPomodoroDate = new Date().toISOString().split('T')[0]; // Guardar fecha actual
+        localStorage.setItem('lastPomodoroDate', lastPomodoroDate);
+        //setear la racha en 0
+        let pomodoroStreak = 0;
+        localStorage.setItem('pomodoroStreak', pomodoroStreak);
+        firstTime = false;
+        console.log("firstTime:" + firstTime);
+        localStorage.setItem('firstTime', firstTime);
+    }
 
     // Función para actualizar el display del timer
     function updateTimerDisplay() {
@@ -54,6 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             showPopup("¡Pomodoro completado! 🎉");
                             cycleCount = 0; // Reiniciar el contador
                             resetTimer(); // Reinicia el temporizador
+                            if(isNewDay()){
+                                increaseStreak();
+                                console.log("Es un nuevo día");
+                            }else{
+                                console.log("No es un nuevo día");
+                            }
                             return; // Finaliza el proceso
                         }
                         showPopup("Tiempo de descanso ⏳");
@@ -95,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Guardar en localStorage y validar los valores
 
-        if(studyDuration < 10 || studyDuration > 60){
+        if(studyDuration < 1 || studyDuration > 60){
             studyDuration = 25;
             //Mostrar mensaje de error
             alert("El tiempo de estudio debe estar entre 10 y 60 minutos");
