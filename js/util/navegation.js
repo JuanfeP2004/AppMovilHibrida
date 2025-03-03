@@ -1,27 +1,28 @@
-class Navegacion {
+import Auth from "./auth.js";
 
+class Navegacion {
     paginas = [];
 
     constructor() {
-        this.paginas.push({ nombre: "inicioSesion", ref: document.querySelector('.inicioSesion')});
-        this.paginas.push({ nombre: "registro", ref: document.querySelector('.registro')});
-        this.paginas.push({ nombre: "verHoy", ref: document.querySelector('.verHoy')});
-        this.paginas.push({ nombre: "calendario", ref: document.querySelector('.calendario')});
-        this.paginas.push({ nombre: "pomodoro", ref: document.querySelector('.pomodoro')});
-        this.paginas.push({ nombre: "crearTarea", ref: document.querySelector('.crearTarea')});
+        this.auth = new Auth(); // Instancia de Auth
+        this.paginas.push({ nombre: "inicioSesion", ref: document.querySelector('.inicioSesion') });
+        this.paginas.push({ nombre: "registro", ref: document.querySelector('.registro') });
+        this.paginas.push({ nombre: "verHoy", ref: document.querySelector('.verHoy'), privada: true });
+        this.paginas.push({ nombre: "calendario", ref: document.querySelector('.calendario'), privada: true });
+        this.paginas.push({ nombre: "pomodoro", ref: document.querySelector('.pomodoro'), privada: true });
+        this.paginas.push({ nombre: "crearTarea", ref: document.querySelector('.crearTarea'), privada: true });
 
         document.querySelectorAll('.navButton').forEach(item => {
             item.addEventListener('click', this.cambiarPagina.bind(this));
         });
     }
 
-    paginaInicial(){
+    paginaInicial() {
         this.paginas.find(pagina => {
-            if(pagina.nombre === 'inicioSesion'){
+            if (pagina.nombre === 'inicioSesion') {
                 pagina.ref.style.display = 'block';
-            }
-            else {
-                pagina.ref.style.display = 'none';	
+            } else {
+                pagina.ref.style.display = 'none';
             }
         });
     }
@@ -31,12 +32,11 @@ class Navegacion {
         evento.preventDefault();
     
         this.paginas.forEach(pagina => {
-            if(pagina.nombre === parametro){
-                pagina.ref.style.display = 'block';
-            } else {
-                pagina.ref.style.display = 'none';
-            }
+            pagina.ref.style.display = (pagina.nombre === parametro) ? 'block' : 'none';
         });
+    
+        // 🔥 Notificamos que la página cambió para que `main.js` pueda asignar eventos
+        document.dispatchEvent(new Event("paginaCambiada"));
     }
 }
 
