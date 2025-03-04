@@ -1,45 +1,14 @@
 console.log("🚀 auth.js cargado correctamente");
 
 class Auth {
-    constructor() {
+    constructor(navegacion) {
+        this.navegacion = navegacion; // ✅ Guardamos la referencia a `Navegacion`
         this.usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
         this.usuarioActual = JSON.parse(localStorage.getItem("usuarioActual")) || null;
     }
 
-    configurarEventos() {
-        console.log("🔄 Configurando eventos de autenticación...");
-
-        const loginForm = document.querySelector("#loginForm");
-        const registerForm = document.querySelector("#registerForm");
-
-        if (loginForm) {
-            loginForm.addEventListener("submit", (event) => {
-                event.preventDefault();
-                const username = document.querySelector("#loginUsername").value.trim();
-                const password = document.querySelector("#loginPassword").value.trim();
-
-                if (this.login(username, password)) {
-                    document.dispatchEvent(new Event("paginaCambiada"));
-                }
-            });
-        }
-
-        if (registerForm) {
-            registerForm.addEventListener("submit", (event) => {
-                event.preventDefault();
-                const username = document.querySelector("#registerUsername").value.trim();
-                const password = document.querySelector("#registerPassword").value.trim();
-                const confirmPassword = document.querySelector("#confirmPassword").value.trim();
-
-                if (this.registrar(username, password, confirmPassword)) {
-                    document.dispatchEvent(new Event("paginaCambiada"));
-                }
-            });
-        }
-    }
-
     registrar(username, password, confirmPassword) {
-        if (!username || !password || !confirmPassword) {
+        if (!username.trim() || !password.trim() || !confirmPassword.trim()) {
             alert("❌ Todos los campos son obligatorios");
             return false;
         }
@@ -56,14 +25,17 @@ class Auth {
             return false;
         }
 
-        this.usuarios.push({ username, password });
+        const nuevoUsuario = { username, password };
+        this.usuarios.push(nuevoUsuario);
         localStorage.setItem("usuarios", JSON.stringify(this.usuarios));
         alert("✅ Registro exitoso");
+
+        this.navegacion.cambiarPagina("inicioSesion"); // ✅ Redirige al login después del registro
         return true;
     }
 
     login(username, password) {
-        if (!username || !password) {
+        if (!username.trim() || !password.trim()) {
             alert("❌ Todos los campos son obligatorios");
             return false;
         }
@@ -78,11 +50,9 @@ class Auth {
         localStorage.setItem("usuarioActual", JSON.stringify(usuario));
         localStorage.setItem("isAuthenticated", "true");
         alert("✅ Inicio de sesión exitoso");
-        return true;
-    }
 
-    estaAutenticado() {
-        return localStorage.getItem("isAuthenticated") === "true";
+        this.navegacion.cambiarPagina("verHoy"); // ✅ Redirige a la vista principal
+        return true;
     }
 
     logout() {
@@ -90,6 +60,55 @@ class Auth {
         localStorage.removeItem("usuarioActual");
         localStorage.removeItem("isAuthenticated");
         alert("👋 Sesión cerrada");
+        this.navegacion.cambiarPagina("login"); // ✅ Redirige al login
+    }
+
+    configurarEventos() {
+        console.log("🔄 Configurando eventos...");
+
+        this.loginForm = document.getElementById("loginForm");
+        this.registerForm = document.getElementById("registerForm");
+
+        if (this.loginForm) {
+            let btnLogin = this.loginForm.querySelector("button[type='submit']");
+            if (btnLogin) {
+                btnLogin.replaceWith(btnLogin.cloneNode(true)); // Eliminamos eventos previos
+                btnLogin = this.loginForm.querySelector("button[type='submit']");
+
+                btnLogin.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    console.log("🔐 Intentando iniciar sesión...");
+
+                    const username = document.querySelector("#loginUsername").value.trim();
+                    const password = document.querySelector("#loginPassword").value.trim();
+
+                    if (this.login(username, password)) {
+                        document.dispatchEvent(new Event("paginaCambiada"));
+                    }
+                });
+            }
+        }
+
+        if (this.registerForm) {
+            let btnRegister = this.registerForm.querySelector("button[type='submit']");
+            if (btnRegister) {
+                btnRegister.replaceWith(btnRegister.cloneNode(true)); // Eliminamos eventos previos
+                btnRegister = this.registerForm.querySelector("button[type='submit']");
+
+                btnRegister.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    console.log("🆕 Intentando registrar usuario...");
+
+                    const username = document.querySelector("#registerUsername").value.trim();
+                    const password = document.querySelector("#registerPassword").value.trim();
+                    const confirmPassword = document.querySelector("#confirmPassword").value.trim();
+
+                    if (this.registrar(username, password, confirmPassword)) {
+                        document.dispatchEvent(new Event("paginaCambiada"));
+                    }
+                });
+            }
+        }
     }
 }
 
