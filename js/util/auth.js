@@ -1,11 +1,12 @@
 import bcrypt from "bcryptjs";
+import { Usuario } from "./user.js";
 
 console.log("🚀 auth.js cargado correctamente");
 
 class Auth {
     constructor(navegacion) {
         this.navegacion = navegacion; // ✅ Guardamos la referencia a `Navegacion`
-        this.usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+        this.usuarios = JSON.parse(localStorage.getItem("usuarios"))?.map(user => new Usuario(user.username, user.password)) || [];
         this.usuarioActual = JSON.parse(localStorage.getItem("usuarioActual")) || null;
     }
 
@@ -26,16 +27,18 @@ class Auth {
             alert("❌ El usuario ya existe");
             return false;
         }
-
+    
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
-
-        const nuevoUsuario = { username, password: hashedPassword };
+    
+        // 🔹 En lugar de un objeto plano, usamos la clase Usuario
+        const nuevoUsuario = new Usuario(username, hashedPassword);
+        
         this.usuarios.push(nuevoUsuario);
         localStorage.setItem("usuarios", JSON.stringify(this.usuarios));
         alert("✅ Registro exitoso");
-
-        this.navegacion.cambiarPagina("inicioSesion"); // ✅ Redirige al login después del registro
+    
+        this.navegacion.cambiarPagina("inicioSesion"); 
         return true;
     }
 
