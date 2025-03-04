@@ -1,3 +1,5 @@
+import bcrypt from "bcryptjs";
+
 console.log("🚀 auth.js cargado correctamente");
 
 class Auth {
@@ -7,7 +9,7 @@ class Auth {
         this.usuarioActual = JSON.parse(localStorage.getItem("usuarioActual")) || null;
     }
 
-    registrar(username, password, confirmPassword) {
+    async registrar(username, password, confirmPassword) {
         if (!username.trim() || !password.trim() || !confirmPassword.trim()) {
             alert("❌ Todos los campos son obligatorios");
             return false;
@@ -25,7 +27,10 @@ class Auth {
             return false;
         }
 
-        const nuevoUsuario = { username, password };
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
+
+        const nuevoUsuario = { username, password: hashedPassword };
         this.usuarios.push(nuevoUsuario);
         localStorage.setItem("usuarios", JSON.stringify(this.usuarios));
         alert("✅ Registro exitoso");
@@ -34,14 +39,14 @@ class Auth {
         return true;
     }
 
-    login(username, password) {
+    async login(username, password) {
         if (!username.trim() || !password.trim()) {
             alert("❌ Todos los campos son obligatorios");
             return false;
         }
 
-        const usuario = this.usuarios.find(user => user.username === username && user.password === password);
-        if (!usuario) {
+        const usuario = this.usuarios.find(user => user.username === username);
+        if (!usuario || !bcrypt.compareSync(password, usuario.password)) {
             alert("❌ Usuario o contraseña incorrectos");
             return false;
         }
@@ -60,7 +65,7 @@ class Auth {
         localStorage.removeItem("usuarioActual");
         localStorage.removeItem("isAuthenticated");
         alert("👋 Sesión cerrada");
-        this.navegacion.cambiarPagina("login"); // ✅ Redirige al login
+        this.navegacion.cambiarPagina("inicioSesion"); // ✅ Redirige al login
     }
 
     configurarEventos() {
