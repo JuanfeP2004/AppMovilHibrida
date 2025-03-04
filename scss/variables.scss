@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+// Modo Claro (default)
+$bg-light: #E4F2EF;
+$text-light: #44464D;
+$border-light: #748C9E;
+$primary-light: #2AD4C0;
+$success-light: #AEF2B9;
+
+// Modo Oscuro
+$bg-dark: #22262B;
+$text-dark: #E4F2EF;
+$border-dark: #55687A;
+$primary-dark: #1A9F90;
+$success-dark: #61C47E;
+
+// Tipografías
+$font-primary: 'Montserrat', sans-serif;
+
+// Breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop: 1024px;

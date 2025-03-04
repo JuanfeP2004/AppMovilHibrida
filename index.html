@@ -6,6 +6,7 @@
     <title>Studyflow</title>
     <script src="js/main.js" type="module"></script>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="img/StudyFlow-ico.png" type="image/x-icon">
 </head>
 <body>
     <main class="inicioSesion">
@@ -59,72 +60,25 @@
         </form>
     </main>
 
-    <main class="verHoy">
-        <header>
-            <div>
-                <img src="img/backToLogin.svg" alt="" class="navButton" data-page="inicioSesion">
-            </div>
-        </header>
-        <nav>
-            <div>
-                <div><a href="" class="navButton" data-page="verHoy">Hoy</a></div>
-                <div><a href="" class="navButton" data-page="calendario">Calendario</a></div>
-                <div><a href="" class="navButton" data-page="pomodoro">Pomodoro</a></div>
-                <div><a href="" class="navButton" data-page="crearTarea">+</a></div>
-            </div>
-        </nav>  
-        <div>
-            <div>
-                <div>
-                    <p>Lunes</p>
-                    <h2>17 Febrero</h2>
-                </div>
-                <div>
-                    <h3>6:50 AM</h3>
-                </div>
-            </div>
-            <div>
-                <div>
-                    <div>
-                        <h2>
-                            Parcial #1 Algebra Lineal
-                        </h2>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>
-                                <p>Unidades 3 - 5</p>
-                            </li>
-                            <li>
-                                <p>8:00 AM</p>
-                            <li>
-                                <p>20%</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <h2>
-                            Exposición Arquitectura de computadores
-                        </h2>
-                    </div>
-                    <div>
-                        <ul>
-                            <li>
-                                <p>Arq. RISC y CISC</p>
-                            </li>
-                            <li>
-                                <p>14:00 PM</p>
-                            <li>
-                                <p>10%</p>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- Sección de la vista ver hoy -->
+    <section id="verHoy" class="active">
+      <div class="header">
+        <button class="tab active">Hoy</button>
+        <button class="tab" id="ir-vista-calendario">Calendario</button>
+        <button class="tab" id="ir-vista-pomodoro">Pomodoro</button>
+        <button id="addTaskBtn" class="add">+</button>
+      </div>
+      <div class="date-time">
+        <div class="date">
+          <p class="day"><var id="dia-semana">miercoles</var></p>
+          <p class="full-date"><var id="fecha-completa">17 Febrero</var></p>
         </div>
-    </main>
+        <p class="time"><var id="hora-actual">6:50 AM</var></p>
+      </div>
+
+      <!-- Lista de tareas dinámicas -->
+      <div class="tasks" id="tasksContainer"></div>
+    </section>
 
     <main class="calendario">
         <div>
@@ -234,38 +188,50 @@
         </div>
     </main>
 
-    <main class="pomodoro">
+    <!-- Sección estudio pomodoro -->
+    <section id="pomodoro" class="hidden">
+      <div class="pomodoro-container">
         <header>
-            <div>
-                <img src="img/back-arrow-navigation.svg" alt="" class="navButton" data-page="verHoy">
-            </div>
+          <button class="back-button">
+            <img src="img/back-arrow-navigation.svg" data-page="verHoy" alt="Volver">
+          </button>
         </header>
-        <div>
-            <div>
-                <img src="img/logo.png" alt="">
-                <h1>Pomodoro</h1>
-            </div>
-            <div>
-                <div>
-                    <div>
-                        <h2>25:00</h2>
-                        <h3>minutos</h3>
-                    </div>
-                    <div>
-                        <img src="img/settings.svg" alt="">
-                    </div>
-                </div>
-                <div>
-                    <input type="number" placeholder="Repeticiones" required min="1">
-                    <button>Iniciar</button>
-                    <button>Detener</button>
-                </div>
-            </div>
-            <div>
-                <h2>RACHA POMODORO: 12 DÍAS <img src="img/fire.svg" alt=""></h2>
-            </div>
+
+        <div class="title-logo">
+          <div class="app-icon">
+            <img src="public/images/StudyFlow-logo.png" alt="Logo de StudyFlow">
+            <h2>Estudio Pomodoro</h2>
+          </div>
         </div>
-    </main>
+
+        <div class="timer-settings">
+          <div class="outter-circle">
+            <div class="inner-circle">
+              <span id="timer"></span>
+              <span>min</span>
+            </div>
+          </div>
+          <button class="settings-button" id="openSettings">
+            <img src="src/assets/settings.svg" alt="Configuración">
+          </button>
+        </div>
+
+        <div class="buttons">
+          <!-- Botón iniciar -->
+          <button class="button button-primary" id="start">Iniciar</button>
+          <!-- Botón pausar -->
+          <button class="button button-secondary" id="pause">Pausar</button>
+          <!-- Botón restablecer -->
+          <button class="button button-secondary" id="reset">Restablecer</button>
+        </div>
+
+        <footer>
+          <div class="streak">
+            <p>RACHA POMODORO: <var id="strikeDays">x</var> días <img src="src/assets/fire.svg" alt="Fuego"></p>
+          </div>
+        </footer>
+      </div>
+    </section>
 
     <main class="crearTarea">
         <img src="img/logo.png" alt="">
@@ -286,5 +252,38 @@
             </form>
         </div>
     </main>
+
+    <!-- Modal de configuración (fuera de la sección) -->
+  <div class="modal-overlay hidden" id="settingsModal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title">Configuración Pomodoro</span>
+        <button class="close-modal" id="closeModal">&times;</button>
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="studyTime">Tiempo de estudio (max. 60 minutos)</label>
+        <input type="number" id="studyTime" class="settings-input" min="10" max="60" value="25">
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="breakTime">Tiempo de descanso (max. 30 minutos)</label>
+        <input type="number" id="breakTime" class="settings-input" min="1" max="30" value="5">
+      </div>
+      <div class="settings-group">
+        <label class="settings-label" for="repetitionsCount">Número de repeticiones (max. 10)</label>
+        <input type="number" id="repetitionsCount" class="settings-input" min="1" max="10" value="4">
+      </div>
+      <button class="save-settings" id="saveSettings">Guardar cambios</button>
+    </div>
+  </div>
+
+  <!-- Popup de notificación -->
+  <div id="popupNotification" class="popup hidden">
+    <p id="popupMessage"></p>
+    <button id="closePopup">Cerrar</button>
+  </div>
+
+  <!-- Sonido alarma pomodoro -->
+  <audio id="alarmSound" src="src\assets\pomo-alarm.mp3"></audio>
+
 </body>
 </html>

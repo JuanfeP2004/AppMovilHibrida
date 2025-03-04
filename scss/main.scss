@@ -1,6 +1,8 @@
-body {
-    background-color: #f0f0f0;
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-}
+@import 'variables';
+@import 'global';
+@import 'header';
+@import 'pomodoro';
+@import 'pomodoroFooter';
+@import 'pomodoroModal';
+@import 'pomodoroPopUp';
+@import 'verHoy';
