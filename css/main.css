@@ -660,6 +660,45 @@ footer .streak img {
     padding: 10px;
   }
 }
+.tasks {
+  background-color: #2AD4C0;
+  width: 100%;
+  min-height: 80vh;
+  max-height: 100vh;
+  border-radius: 25px 25px 0 0;
+  padding: 20px 10px;
+  overflow-y: scroll;
+}
+
+.task-card {
+  background: #748C9E;
+  color: white;
+  padding: 15px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+.task-card .task-info .task-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.task-card .task-info .task-type {
+  font-size: 0.9rem;
+}
+.task-card .task-details {
+  text-align: right;
+}
+.task-card .task-details .task-time {
+  font-size: 1rem;
+  font-weight: bold;
+}
+.task-card .task-details .task-progress {
+  font-size: 0.9rem;
+}
+
 * {
   margin: 0;
   padding: 0;

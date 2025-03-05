@@ -1,7 +1,6 @@
 @use 'variables' as v;
 @use 'calendario';
 @use 'crearTarea';
-
 @import 'variablesX';
 @import 'global';
 @import 'header';
@@ -10,6 +9,7 @@
 @import 'pomodoroModal';
 @import 'pomodoroPopUp';
 @import 'verHoy';
+@import 'tasks';
 
 
 * {

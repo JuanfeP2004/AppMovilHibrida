@@ -1,3 +1,4 @@
+import { mostrarTareasHoy } from './verHoy.js';
 class Navegacion {
 
     paginas = [];
@@ -33,6 +34,10 @@ class Navegacion {
         this.paginas.forEach(pagina => {
             if(pagina.nombre === parametro){
                 pagina.ref.style.display = 'block';
+                //Recargar las tareas del día
+                if (parametro === "verHoy") {
+                    mostrarTareasHoy();
+                }
             } else {
                 pagina.ref.style.display = 'none';
             }
@@ -43,6 +48,10 @@ class Navegacion {
         this.paginas.forEach(pagina => {
             if(pagina.nombre === parametro){
                 pagina.ref.style.display = 'block';
+                //Recargar las tareas del día
+                if (parametro === "verHoy") {
+                    mostrarTareasHoy();
+                }
             } else {
                 pagina.ref.style.display = 'none';
             }

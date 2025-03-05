@@ -2,6 +2,7 @@ import Navegacion from './util/navegation.js';
 import "./util/pomodoroModal.js";
 import "./util/pomodoroStreak.js";
 import "./util/verHoyDate.js";
+import "./util/verHoy.js";
 import CrearTarea from './util/crearTarea.js';
 import Calendario from './util/calendario.js';
 import Tarea from './data/tarea.js';
