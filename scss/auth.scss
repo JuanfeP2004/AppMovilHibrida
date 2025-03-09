@@ -1,0 +1,97 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.inicioSesion, .registro {
+  width: 100%;
+  max-width: 450px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px $shadow-color;
+
+  header {
+    @include flex-center;
+    flex-direction: column;
+    margin-bottom: 30px;
+
+    div {
+      margin-bottom: 15px;
+
+      img {
+        width: 120px;
+        height: auto;
+      }
+    }
+
+    h1 {
+      font-size: 24px;
+      color: $dark-gray;
+      text-align: center;
+    }
+  }
+
+  form {
+    div {
+      margin-bottom: 15px;
+
+      input {
+        @include input-style;
+      }
+    }
+  }
+}
+
+// Estilos para los botones de navegación
+.navButton {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 5px;
+}
+
+// Botones específicos para Inicio de Sesión
+.inicioSesion {
+  form div:nth-child(3) .navButton {
+    background-color: $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: #25BBA9;
+    }
+  }
+
+  form div:nth-child(4) .navButton {
+    background-color: $medium-gray;
+    color: white;
+
+    &:hover {
+      background-color: #637A88;
+    }
+  }
+}
+
+// Botones específicos para Registro
+.registro {
+  form div:nth-child(4) .navButton {
+    background-color: $primary-color;
+    color: white;
+
+    &:hover {
+      background-color: #25BBA9;
+    }
+  }
+
+  form div:nth-child(5) .navButton {
+    background-color: $medium-gray;
+    color: white;
+
+    &:hover {
+      background-color: #637A88;
+    }
+  }
+}

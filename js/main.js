@@ -17,7 +17,8 @@ let auth = new Auth(nav); // 🔹 Agregamos autenticación a la navegación
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    auth.verificarSesion(); // 🔹 Verifica si el usuario está autenticado antes de mostrar la página
+    auth.verificarSesion(); 
+    auth.configurarEventos(); // 🔹 Se asegura de que los eventos se configuren al cargar la página
     nav.paginaInicial();
     calendario.ponerMes(new Date().getMonth()); 
     calendario.ponerTareas(user.name, new Date().getMonth(), new Date().getFullYear());
