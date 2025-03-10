@@ -44,19 +44,20 @@
 
         <form id="registerForm">
             <div>
-                <input type="text" id="username" placeholder="Usuario">
+                <input type="text" id="rgt-username" placeholder="Usuario">
             </div>
             <div>
-                <input type="password" id="password" placeholder="Contraseña">
+                <input type="password" id="rgt-password" placeholder="Contraseña">
             </div>
             <div>
                 <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
             </div>
             <div>
-                <button type="submit" class="navButton" data-page="inicioSesion">Crear cuenta</button>
+                <p id="bad-register"></p>
+                <button type="submit" id="register" class="" data-page="">Crear cuenta</button>
             </div>
             <div>
-                <button type="button"  id="loginBtn" class="navButton" data-page="inicioSesion">Ya tengo una cuenta</button>
+                <button type="button"  id="cancelar-registro" class="navButton" data-page="inicioSesion">Ya tengo una cuenta</button>
             </div>
         </form>
     </main>

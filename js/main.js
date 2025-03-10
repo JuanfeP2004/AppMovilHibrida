@@ -4,6 +4,7 @@ import "./util/pomodoroStreak.js";
 import "./util/verHoyDate.js";
 import "./util/verHoy.js";
 import InicioSesion from "./util/inicioSesion.js";
+import Registro from './util/registro.js';
 import CrearTarea from './util/crearTarea.js';
 import Calendario from './util/calendario.js';
 import Tarea from './data/tarea.js';
@@ -47,6 +48,7 @@ console.log(usuarios);
 
 let nav = new Navegacion();
 let login = new InicioSesion(usuarioActual, usuarios, nav);
+let registro = new Registro(usuarios, nav);
 let calendario = new Calendario(nav, 'Juan');
 let crearTarea = new CrearTarea('Juan', calendario, nav);
 
