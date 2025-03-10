@@ -3,6 +3,7 @@ import "./util/pomodoroModal.js";
 import "./util/pomodoroStreak.js";
 import "./util/verHoyDate.js";
 import "./util/verHoy.js";
+import InicioSesion from "./util/inicioSesion.js";
 import CrearTarea from './util/crearTarea.js';
 import Calendario from './util/calendario.js';
 import Tarea from './data/tarea.js';
@@ -32,10 +33,20 @@ let actividades = [
 ];
 
 let user = new User("Juan", "12345678", 0, actividades);
+let usuarioActual = null;
 
 localStorage.setItem('Juan', JSON.stringify(user));
+localStorage.setItem('Sesion', undefined);
+localStorage.setItem('Usuarios', JSON.stringify([
+    new User('Fabrizio', '12345', 0, []),
+    new User('Orlando', '54321', 0, [])
+]));
+
+let usuarios = JSON.parse(localStorage.getItem('Usuarios'));
+console.log(usuarios);
 
 let nav = new Navegacion();
+let login = new InicioSesion(usuarioActual, usuarios, nav);
 let calendario = new Calendario(nav, 'Juan');
 let crearTarea = new CrearTarea('Juan', calendario, nav);
 
