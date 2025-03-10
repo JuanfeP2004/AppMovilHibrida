@@ -9,6 +9,8 @@ import CrearTarea from './util/crearTarea.js';
 import Calendario from './util/calendario.js';
 import Tarea from './data/tarea.js';
 import User from './data/user.js';
+import ActualUser from './core/actualUser.js';
+import verHoy from './util/verHoy.js';
 
 let actividades = [
     new Tarea("Matemáticas - Álgebra", "Tarea", new Date("2025-03-01T14:30:00"), 85.5),
@@ -33,27 +35,29 @@ let actividades = [
     new Tarea("Biología - Evolución", "Estudio", new Date("2025-06-12T16:05:00"), 93.4)
 ];
 
-let user = new User("Juan", "12345678", 0, actividades);
-let usuarioActual = null;
 
-localStorage.setItem('Juan', JSON.stringify(user));
+let usuarioActual = new ActualUser();
+
 localStorage.setItem('Sesion', undefined);
 localStorage.setItem('Usuarios', JSON.stringify([
-    new User('Fabrizio', '12345', 0, []),
+    new User('Fabrizio', '12345', 0, actividades),
     new User('Orlando', '54321', 0, [])
 ]));
 
 let usuarios = JSON.parse(localStorage.getItem('Usuarios'));
 console.log(usuarios);
 
-let nav = new Navegacion();
-let login = new InicioSesion(usuarioActual, usuarios, nav);
+let nav = new Navegacion(usuarioActual);
+
+let ver_hoy = new verHoy(usuarioActual);
+let calendario = new Calendario(nav, usuarioActual);
+let crearTarea = new CrearTarea(usuarioActual, calendario, ver_hoy, nav);
+
+let login = new InicioSesion(usuarioActual, usuarios, nav, calendario, ver_hoy);
 let registro = new Registro(usuarios, nav);
-let calendario = new Calendario(nav, 'Juan');
-let crearTarea = new CrearTarea('Juan', calendario, nav);
 
 document.addEventListener('DOMContentLoaded', () => {
     nav.paginaInicial();
     calendario.ponerMes(new Date().getMonth()); 
-    calendario.ponerTareas(user.name, new Date().getMonth(), new Date().getFullYear());
+    //calendario.ponerTareas(usuarioActual.name, new Date().getMonth(), new Date().getFullYear());
 });

@@ -67,18 +67,30 @@ class CrearTarea {
         let valor = this.refvalor.value;
         let fecha = this.reffecha.value;
         let tipo = this.reftipo.value;
-
-        let userLS = JSON.parse(localStorage.getItem(this.user));
         
         let tarea = new Tarea(nombre, tipo, fecha, valor);
-        userLS.tareas.push(tarea);
 
-        localStorage.setItem(this.user, JSON.stringify(userLS));
+        let usuario_actual = this.user.getData();
+        usuario_actual.tareas.push(tarea);
+
+        localStorage.setItem('Sesion', JSON.stringify(usuario_actual));
+
+        let usuarios = JSON.parse(localStorage.getItem('Usuarios'));
+        
+        for(let i = 0; i < usuarios.length; i++){
+            if(usuarios[i].name === usuario_actual.name) {
+                usuarios[i] = usuario_actual;
+            }
+        }
+
+        localStorage.setItem('Usuarios', JSON.stringify(usuarios));
+
         this.calendario.calendario.innerHTML = '';
         this.calendario.mes_actual = new Date(fecha).getMonth()
         this.calendario.anio_actual = new Date(fecha).getFullYear();
+        this.ver_hoy.mostrarTareasHoy();
         this.calendario.ponerMes(new Date(fecha).getMonth());
-        this.calendario.ponerTareas(this.user, new Date(fecha).getMonth(), new Date(fecha).getFullYear());
+        this.calendario.ponerTareas(new Date(fecha).getMonth(), new Date(fecha).getFullYear());
         this.cancelarTarea();
         this.navegacion.cambiarPaginaString("calendario");
     }
@@ -93,15 +105,17 @@ class CrearTarea {
         this.referrortipo.innerHTML = '';
     }
 
-    constructor(user, calendario, navegacion) {
+    constructor(user, calendario, ver_hoy, navegacion) {
         this.refnombre = document.getElementById('titulo');
         this.refvalor = document.getElementById('valor');
         this.reffecha = document.getElementById('fecha');
         this.reftipo = document.getElementById('tipo');
         this.referrorfecha = document.getElementById('error-fecha');
         this.referrortipo = document.getElementById('error-tipo');
+        
 
         this.user = user;
+        this.ver_hoy = ver_hoy;
         this.calendario = calendario;
         this.navegacion = navegacion;
 

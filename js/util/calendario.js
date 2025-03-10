@@ -15,7 +15,7 @@ class Calendario {
         }
         this.ponerMes(this.mes_actual);
         this.calendario.innerHTML = "";
-        this.ponerTareas(this.user, this.mes_actual, this.anio_actual);
+        this.ponerTareas(this.mes_actual, this.anio_actual);
     }
 
     avanzarMes() {
@@ -26,7 +26,7 @@ class Calendario {
         }
         this.ponerMes(this.mes_actual);
         this.calendario.innerHTML = "";
-        this.ponerTareas(this.user, this.mes_actual, this.anio_actual);
+        this.ponerTareas(this.mes_actual, this.anio_actual);
     }
 
     ponerMes(numMes) {
@@ -44,10 +44,11 @@ class Calendario {
         }
     }
 
-    ponerTareas(user, month, year){
+    ponerTareas(month, year){
 
-        let userLS = JSON.parse(localStorage.getItem(user));
-        let arrayString = userLS.tareas;
+        //let userLS = JSON.parse(localStorage.getItem(user));
+        this.calendario.innerHTML = '';
+        let arrayString = this.user.getData().tareas;
         let array = arrayString.map(obj => new Tarea(obj.titulo, obj.tipo, new Date(obj.fecha), obj.valor));
 
         let objects = array.filter(obj => obj.fecha.getMonth() == month && obj.fecha.getFullYear() == year);

@@ -1,9 +1,12 @@
-import { mostrarTareasHoy } from './verHoy.js';
+//import { mostrarTareasHoy } from './verHoy.js';
 class Navegacion {
 
     paginas = [];
 
-    constructor() {
+    constructor(usuario_actual) {
+
+        this.usuario_actual = usuario_actual;
+
         this.paginas.push({ nombre: "inicioSesion", ref: document.querySelector('.inicioSesion')});
         this.paginas.push({ nombre: "registro", ref: document.querySelector('.registro')});
         this.paginas.push({ nombre: "verHoy", ref: document.querySelector('.verHoy')});
@@ -34,10 +37,11 @@ class Navegacion {
         this.paginas.forEach(pagina => {
             if(pagina.nombre === parametro){
                 pagina.ref.style.display = 'block';
+                console.log(this.usuario_actual.getData());
                 //Recargar las tareas del día
-                if (parametro === "verHoy") {
-                    mostrarTareasHoy();
-                }
+                //if (parametro === "verHoy") {
+                //    mostrarTareasHoy(this.usuario_actual);
+                //}
             } else {
                 pagina.ref.style.display = 'none';
             }
@@ -49,9 +53,9 @@ class Navegacion {
             if(pagina.nombre === parametro){
                 pagina.ref.style.display = 'block';
                 //Recargar las tareas del día
-                if (parametro === "verHoy") {
-                    mostrarTareasHoy();
-                }
+                //if (parametro === "verHoy") {
+                //    mostrarTareasHoy();
+                //}
             } else {
                 pagina.ref.style.display = 'none';
             }
