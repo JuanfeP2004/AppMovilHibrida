@@ -33,6 +33,10 @@ class InicioSesion {
         }
     }
 
+    logout() {
+        localStorage.setItem('Sesion', undefined);
+    }
+
     constructor(usuario_actual, usuarios, navegacion){
         this.usuario_actual = usuario_actual;
         this.navegacion = navegacion;
@@ -43,6 +47,9 @@ class InicioSesion {
         this.badlogin = document.getElementById('bad-login');
 
         document.getElementById('ingresar').addEventListener('click', this.login.bind(this));
+        document.querySelectorAll('.login-back').forEach(node =>
+            node.addEventListener('click', this.logout.bind(this))
+        );
     }
 }
 
