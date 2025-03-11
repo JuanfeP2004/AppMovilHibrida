@@ -21,9 +21,14 @@ class InicioSesion {
                 localStorage.setItem('Sesion', JSON.stringify(existe));
                 this.usuario_actual.setData(new User(existe.name, existe.password, existe.pomodoro, existe.tareas));
                 this.badlogin.textContent = '';
+
+                this.calendario.mes_actual = new Date().getMonth()
+                this.calendario.anio_actual = new Date().getFullYear();
                 this.calendario.ponerMes(new Date().getMonth());
+
                 this.ver_hoy.mostrarTareasHoy();
                 this.calendario.ponerTareas(new Date().getMonth(), new Date().getFullYear());
+                this.pomodoro.updatePomodoro();
                 this.navegacion.cambiarPaginaString('verHoy');
                 return;
             }
@@ -39,15 +44,17 @@ class InicioSesion {
     }
 
     logout() {
+        this.pomodoro.resetPomodoro();
         localStorage.setItem('Sesion', undefined);
         this.usuario_actual.setData(undefined);
     }
 
-    constructor(usuario_actual, usuarios, navegacion, calendario, ver_hoy){
+    constructor(usuario_actual, usuarios, navegacion, calendario, ver_hoy, pomodoro){
         this.usuario_actual = usuario_actual;
         this.navegacion = navegacion;
         this.calendario = calendario;
         this.ver_hoy = ver_hoy;
+        this.pomodoro = pomodoro;
         this.usuarios = usuarios;
 
         this.usuario_ref = document.getElementById('username');

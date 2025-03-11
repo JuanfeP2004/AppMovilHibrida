@@ -1,6 +1,7 @@
 import Navegacion from './util/navegation.js';
-import "./util/pomodoroModal.js";
-import "./util/pomodoroStreak.js";
+//import "./util/pomodoroModal.js";
+//import "./util/pomodoroStreak.js";
+import EstudioPomodoro from './util/estudioPomodoro.js';
 import "./util/verHoyDate.js";
 import "./util/verHoy.js";
 import InicioSesion from "./util/inicioSesion.js";
@@ -8,6 +9,7 @@ import Registro from './util/registro.js';
 import CrearTarea from './util/crearTarea.js';
 import Calendario from './util/calendario.js';
 import Tarea from './data/tarea.js';
+import Pomodoro from './data/pomodoro.js';
 import User from './data/user.js';
 import ActualUser from './core/actualUser.js';
 import verHoy from './util/verHoy.js';
@@ -35,13 +37,14 @@ let actividades = [
     new Tarea("Biología - Evolución", "Estudio", new Date("2025-06-12T16:05:00"), 93.4)
 ];
 
+// Arreglar bug de cambio de mes
 
 let usuarioActual = new ActualUser();
 
 localStorage.setItem('Sesion', undefined);
 localStorage.setItem('Usuarios', JSON.stringify([
-    new User('Fabrizio', '12345', 0, actividades),
-    new User('Orlando', '54321', 0, [])
+    new User('Fabrizio', '12345', new Pomodoro(false, new Date('2025-03-03').toISOString().split('T')[0], 0, 25, 5, 4), actividades),
+    new User('Orlando', '54321', new Pomodoro(false, new Date().toISOString().split('T')[0], 0, 25, 5, 4), [])
 ]));
 
 let usuarios = JSON.parse(localStorage.getItem('Usuarios'));
@@ -52,8 +55,9 @@ let nav = new Navegacion(usuarioActual);
 let ver_hoy = new verHoy(usuarioActual);
 let calendario = new Calendario(nav, usuarioActual);
 let crearTarea = new CrearTarea(usuarioActual, calendario, ver_hoy, nav);
+let estudio = new EstudioPomodoro(usuarioActual);
 
-let login = new InicioSesion(usuarioActual, usuarios, nav, calendario, ver_hoy);
+let login = new InicioSesion(usuarioActual, usuarios, nav, calendario, ver_hoy, estudio);
 let registro = new Registro(usuarios, nav);
 
 document.addEventListener('DOMContentLoaded', () => {

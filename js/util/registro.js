@@ -1,4 +1,5 @@
 import User from "../data/user.js";
+import Pomodoro from "../data/pomodoro.js";
 
 class Registro {
 
@@ -32,7 +33,7 @@ class Registro {
 
             this.error.textContent = '';
 
-            this.usuarios.push(new User(username, password, 0, []));
+            this.usuarios.push(new User(username, password, new Pomodoro(false, new Date().toISOString().split('T')[0], 0, 25, 5, 4), []));
             localStorage.setItem('Usuarios', JSON.stringify(this.usuarios));
 
             this.username.value = '';
