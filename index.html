@@ -1,218 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studyflow</title>
-    <script src="js/main.js" type="module"></script>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="shortcut icon" href="img/StudyFlow-ico.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudyFlow</title>
+  <link rel="stylesheet" href="src/assets/styles/css/styles.css">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
+
 <body>
-    <main class="inicioSesion">
-        <header>
-            <div>
-                <img src="img/logo.png" alt="Logo de StudyFlow">
-            </div>
-            <h1>Inicio de Sesión</h1>
-        </header>
+  <main>
+    <!-- SPA - StudyFlow -->
 
-        <form id="loginForm">
-            <div>
-                <input type="text" id="username" placeholder="Usuario">
-            </div>
-            <div>
-                <input type="password" id="password" placeholder="Contraseña">
-            </div>
-            <div>
-              <p id="bad-login"></p>
-              <button type="submit" id="ingresar" class="" data-page="">Ingresar</button>
-            </div>
-            <div>
-                <button type="button" id="registerBtn" class="navButton" data-page="registro">Crea tu cuenta</button>
-            </div>
-        </form>
-    </main>
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <img src="src\assets\images\moon.svg" alt="Modo oscuro" class="moon-icon">
+      <img src="src\assets\images\sun.svg" alt="Modo claro" class="sun-icon" style="display:none;">
+    </button>
 
-    <main class="registro">
-        <header>
-            <div>
-                <img src="img/logo.png" alt="Logo de StudyFlow">
-            </div>
-            <h1>Crea tu cuenta</h1>
-        </header>
+    <!-- Splash Screen -->
+    <section class="splash-screen" id="splashScreen">
+      <div class="splash-container">
+        <div class="logo">
+          <span class="logo-letter"></span>
+        </div>
+        <div>
+          <h1 class="loading-text">Cargando</h1>
+          <div class="loading-spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+      <div class="version">v1.0.0</div>
+    </section>
 
+    <!-- Register Screen -->
+    <section class="auth-screen" id="registerScreen">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h1>Crear Cuenta</h1>
+          <p>Por favor completa la información</p>
+        </div>
         <form id="registerForm">
-            <div>
-                <input type="text" id="rgt-username" placeholder="Usuario">
+          <div class="form-group">
+            <label for="username">Usuario</label>
+            <div class="input-with-icon">
+              <input type="text" id="username" name="username" placeholder="Ingresa tu usuario" required>
+              <img src="src/assets/images/user.svg" alt="Usuario" class="input-icon">
             </div>
-            <div>
-                <input type="password" id="rgt-password" placeholder="Contraseña">
+          </div>
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <div class="input-with-icon">
+              <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+              <img src="src/assets/images/lock.svg" alt="Contraseña" class="input-icon">
             </div>
-            <div>
-                <input type="password" id="confirmPassword" placeholder="Confirmar contraseña">
+          </div>
+          <div class="form-group">
+            <label for="confirm-password">Confirmar Contraseña</label>
+            <div class="input-with-icon">
+              <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirma tu contraseña"
+                required>
+              <img src="src/assets/images/lock.svg" alt="Confirmar contraseña" class="input-icon">
             </div>
-            <div>
-                <p id="bad-register"></p>
-                <button type="submit" id="register" class="" data-page="">Crear cuenta</button>
-            </div>
-            <div>
-                <button type="button"  id="cancelar-registro" class="navButton" data-page="inicioSesion">Ya tengo una cuenta</button>
-            </div>
+          </div>
+          <button type="submit" class="auth-btn">Registrarse</button>
+          <div class="auth-link">
+            ¿Ya tienes una cuenta? <a href="" id="showLoginLink">Iniciar sesión</a>
+          </div>
         </form>
-    </main>
-
-    <!-- Sección de la vista ver hoy -->
-    <section id="verHoy" class="verHoy">
-      <div class="header">
-        <img src="img/backToLogin.svg" alt="" class="header-button navButton login-back" data-page="inicioSesion">
       </div>
-      <div class="header">
-        <button class="tab active">Hoy</button>
-        <button class="tab navButton" data-page="calendario" id="ir-vista-calendario">Calendario</button>
-        <button class="tab navButton" data-page="pomodoro" id="ir-vista-pomodoro">Pomodoro</button>
-        <button id="addTaskBtn" class="add navButton" data-page="crearTarea">+</button>
-      </div>
-      <div class="date-time">
-        <div class="date">
-          <p class="day"><var id="dia-semana">miercoles</var></p>
-          <p class="full-date"><var id="fecha-completa">17 Febrero</var></p>
-        </div>
-        <p class="time"><var id="hora-actual">6:50 AM</var></p>
-      </div>
-
-      <!-- Lista de tareas dinámicas -->
-      <div class="tasks" id="tasksContainer"></div>
     </section>
 
-    <main class="calendario">
-        <div class="header">
-            <img src="img/backToLogin.svg" alt="" class="header-button navButton login-back" data-page="inicioSesion">
+    <!-- Login Screen -->
+    <section class="auth-screen" id="loginScreen">
+      <div class="auth-container">
+        <div class="auth-header">
+          <h1>Iniciar Sesión</h1>
+          <p>Ingresa tus credenciales para continuar</p>
         </div>
-        <div class="nav">
-            <div class="nav-button"><a href="" class="nav-button-text navButton" data-page="verHoy">Hoy</a></div>
-            <div class="nav-button-select"><a href="" class="nav-button-text navButton" data-page="calendario">Calendario</a></div>
-            <div class="nav-button"><a href="" class="nav-button-text navButton" data-page="pomodoro">Pomodoro</a></div>
-            <div class="nav-button-t"><a href="" class="nav-button-text navButton" data-page="crearTarea">+</a></div>
-        </div>
-
-        <div class="month-nav">
-            <p id="month-bf-text" class="month-nav-text">Mes anterior</p>
-            <p class="month-nav-text-select">
-                <em id="month-bf" class="month-nav-select">&lt;</em> 
-                <em id="month-text" class="month-nav-select">Mes</em> 
-                <em id="month-af" class="month-nav-select">&gt;</em> 
-            </p>
-            <p id="month-af-text" class="month-nav-text">Mes Posterior</p>
-        </div>
-
-        <div id="month-calendar" class="month-calendar">
-        </div>
-    </main>
-
-    <!-- Sección estudio pomodoro -->
-    <section id="pomodoro" class="pomodoro">
-      <div class="pomodoro-container">
-        <header>
-          <button class="back-button navButton" data-page="verHoy">
-            <img src="img/back-arrow-navigation.svg" data-page="verHoy" alt="Volver">
-          </button>
-        </header>
-
-        <div class="title-logo">
-          <div class="app-icon">
-            <img src="img/StudyFlow-ico.png" alt="Logo de StudyFlow">
-            <h2>Estudio Pomodoro</h2>
-          </div>
-        </div>
-
-        <div class="timer-settings">
-          <div class="outter-circle">
-            <div class="inner-circle">
-              <span id="timer"></span>
-              <span>min</span>
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="login-username">Usuario</label>
+            <div class="input-with-icon">
+              <input type="text" id="login-username" name="username" placeholder="Ingresa tu usuario" required>
+              <img src="src/assets/images/user.svg" alt="Usuario" class="input-icon">
             </div>
           </div>
-          <button class="settings-button" id="openSettings">
-            <img src="img/settings.svg" alt="Configuración">
-          </button>
-        </div>
-
-        <div class="buttons">
-          <!-- Botón iniciar -->
-          <button class="button button-primary" id="start">Iniciar</button>
-          <!-- Botón pausar -->
-          <button class="button button-secondary" id="pause">Pausar</button>
-          <!-- Botón restablecer -->
-          <button class="button button-secondary" id="reset">Restablecer</button>
-        </div>
-
-        <footer>
-          <div class="streak">
-            <p>RACHA POMODORO: <var id="strikeDays">x</var> días <img src="img/fire.svg" alt="Fuego"></p>
+          <div class="form-group">
+            <label for="login-password">Contraseña</label>
+            <div class="input-with-icon">
+              <input type="password" id="login-password" name="password" placeholder="Ingresa tu contraseña" required>
+              <img src="src/assets/images/lock.svg" alt="Contraseña" class="input-icon">
+            </div>
           </div>
-        </footer>
+          <div class="form-options">
+            <div class="remember-me">
+              <input type="checkbox" id="remember" name="remember">
+              <label for="remember">Recordarme</label>
+            </div>
+            <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
+          </div>
+          <button type="submit" class="auth-btn">Iniciar Sesión</button>
+          <div class="auth-link">
+            ¿No tienes una cuenta? <a href="" id="showRegisterLink">Regístrate</a>
+          </div>
+        </form>
       </div>
     </section>
 
-    <main class="crearTarea">
-        <img class="crearTarea-logo" src="img/logo.png" alt="">
-        <h2 class="crearTarea-titulo">Crear Nueva Tarea</h2>
-        <div class="crearTarea-form">
-            <form action="">
-                <div class="crearTarea-inputs">
-                    <select name="tipo" id="tipo" class="crearTarea-input">
-                        <option value="Default">Tipo</option>
-                        <option value="Tarea">Tarea</option>
-                        <option value="Estudio">Estudio</option>
-                        <option value="Examen">Examen</option>
-                    </select>
-                    <span id="error-tipo" class="texto-error"></span>
-                    <input type="text" name="nombre" placeholder="Titulo" id="titulo" class="crearTarea-input">
-                    <input type="datetime-local" name="fecha" id="fecha" class="crearTarea-input">
-                    <span id="error-fecha" class="texto-error"></span>
-                    <input type="text" name="descripcion" placeholder="Valor" id="valor" class="crearTarea-input">
-                </div>
-                
-                <div class="crearTarea-buttons">
-                    <button class="navButton crearTarea-button" data-page="calendario" id="cancelarTarea">Cancelar</button>
-                    <button class="navButton crearTarea-button" data-page="crearTarea" id="crearTarea">Crear</button>
-                </div>        
-            </form>
+    <!-- Dashboard Screen -->
+    <section class="dashboard-screen" id="dashboardScreen">
+      <!-- logOut Button -->
+      <header class="header">
+        <button class="logout-btn" id="logoutBtn">
+          <img src="src/assets/images/logout.svg" alt="Cerrar sesión">
+        </button>
+      </header>
+
+      <!-- Navegación -->
+      <div class="nav-container">
+        <nav class="nav">
+          <button class="nav-btn" data-view="today-view">Hoy</button>
+          <button class="nav-btn" data-view="calendar-view">Calendario</button>
+          <button class="nav-btn" data-view="pomodoro-view">Pomodoro</button>
+          <button class="nav-add" id="add-task-modal">+</button>
+        </nav>
+      </div>
+
+      <!-- Vista Today -->
+      <section id="today-view" class="">
+        <section class="datetime">
+          <div class="day" id="currentDay">Lunes</div>
+          <div class="date-time">
+            <div class="date" id="currentDate">17 Febrero</div>
+            <div class="time" id="currentTime">6:50 AM</div>
+          </div>
+        </section>
+
+        <main class="task-list" id="task-list">
+          <div class="task-card">
+            <h2 class="task-type">Parcial #1</h2>
+            <p class="task-subject">Álgebra Lineal</p>
+            <div class="task-details">
+              <span class="task-comment">Unidades 3 - 5</span>
+              <span class="task-time">8:00 AM</span>
+            </div>
+            <div class="task-value">20%</div>
+          </div>
+
+          <div class="task-card">
+            <h2 class="task-type">Exposición</h2>
+            <p class="task-subject">Arquitectura de Computadores</p>
+            <div class="task-details">
+              <span class="task-comment">Arq. RISC y CISC</span>
+              <span class="task-time">14:00 PM</span>
+            </div>
+            <div class="task-value">10%</div>
+          </div>
+        </main>
+      </section>
+
+      <!-- calendar Screen -->
+      <section id="calendar-view" class="">
+        <!-- Selector de mes -->
+        <div class="month-selector">
+          <span class="month-inactive">Enero</span>
+          <div class="month-nav">
+            <button class="month-arrow" id="month-bf">&lt;</button>
+            <span class="month-current">Febrero</span>
+            <button class="month-arrow" id="month-af">&gt;</button>
+          </div>
+          <span class="month-inactive">Marzo</span>
         </div>
-    </main>
 
-    <!-- Modal de configuración (fuera de la sección) -->
-  <div class="modal-overlay hidden" id="settingsModal">
-    <div class="modal">
-      <div class="modal-header">
-        <span class="modal-title">Configuración Pomodoro</span>
-        <button class="close-modal" id="closeModal">&times;</button>
+        <!-- Lista de tareas del calendario -->
+        <main class="calendar-list">
+          <div class="day-card">
+            <div class="day-info">
+              <span class="day-name">Lunes</span>
+              <span class="day-number">17</span>
+            </div>
+            <div class="day-tasks">
+              <div class="task-column">
+                <div class="task-time">8:00 AM</div>
+                <div class="task-type">Parcial #1</div>
+                <div class="task-subject">Álgebra Lineal</div>
+                <div class="task-value">20%</div>
+              </div>
+              <div class="task-column">
+                <div class="task-time">14:00 PM</div>
+                <div class="task-type">Exposición</div>
+                <div class="task-subject">Arquitectura de...</div>
+                <div class="task-value">10%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-card">
+            <div class="day-info">
+              <span class="day-name">Martes</span>
+              <span class="day-number">18</span>
+            </div>
+            <div class="day-tasks">
+              <div class="task-column">
+                <div class="task-time">10:00 AM</div>
+                <div class="task-type">Parcial #1</div>
+                <div class="task-subject">Estructuras de datos</div>
+                <div class="task-value">20%</div>
+              </div>
+              <div class="task-column">
+                <div class="task-time">11:59 PM</div>
+                <div class="task-type">Entrega #1</div>
+                <div class="task-subject">Contexto Profesional</div>
+                <div class="task-value">10%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-card">
+            <div class="day-info">
+              <span class="day-name">Miércoles</span>
+              <span class="day-number">19</span>
+            </div>
+            <div class="day-tasks">
+              <div class="task-column">
+                <div class="task-time">12:00 PM</div>
+                <div class="task-type">Parcial #1</div>
+                <div class="task-subject">Bases de datos</div>
+                <div class="task-value">20%</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="day-card">
+            <div class="day-info">
+              <span class="day-name">Jueves</span>
+              <span class="day-number">20</span>
+            </div>
+            <div class="day-tasks">
+              <div class="task-column">
+                <div class="task-time">6:00 AM</div>
+                <div class="task-title">Sin tareas</div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </section>
+
+      <!-- pomodoro Screen -->
+      <div id="pomodoro-view" class="">
+        <div class="pomodoro-container">
+          <!-- Selector de modos -->
+          <div class="pomodoro-modes">
+            <button class="pomodoro-mode-btn work active" data-mode="work" data-time="25">Trabajo</button>
+            <button class="pomodoro-mode-btn short-break" data-mode="short-break" data-time="5">Descanso Corto</button>
+            <button class="pomodoro-mode-btn long-break" data-mode="long-break" data-time="15">Descanso Largo</button>
+          </div>
+
+          <!-- Temporizador -->
+          <div class="pomodoro-timer-container">
+            <div class="pomodoro-progress" id="pomodoro-progress"></div>
+            <div class="pomodoro-timer">
+              <div class="pomodoro-time" id="pomodoro-time">25:00</div>
+            </div>
+          </div>
+
+          <!-- Controles -->
+          <div class="pomodoro-controls">
+            <button class="pomodoro-btn reset" id="pomodoro-reset">
+              <span>↺</span>
+            </button>
+            <button class="pomodoro-btn" id="pomodoro-start-pause">
+              <span id="pomodoro-play-icon">▶</span>
+              <span id="pomodoro-pause-icon" style="display:none;">❚❚</span>
+            </button>
+          </div>
+
+          <!-- Estadísticas -->
+          <div class="pomodoro-stats">
+            <div class="pomodoro-cycles" id="pomodoro-cycles">0 ciclos completados</div>
+            <div class="pomodoro-label">Objetivo: 4 ciclos</div>
+          </div>
+        </div>
       </div>
-      <div class="settings-group">
-        <label class="settings-label" for="studyTime">Tiempo de estudio (max. 60 minutos)</label>
-        <input type="number" id="studyTime" class="settings-input" min="10" max="60" value="25">
+
+      <!-- Modal para agregar tarea -->
+      <div id="taskModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>Agregar Nueva Tarea</h2>
+            <button class="close-modal">&times;</button>
+          </div>
+          <form id="add-task-form">
+            <div class="form-group">
+              <label for="task-type">Tipo de Tarea</label>
+              <select id="task-type" required>
+                <option value="" disabled selected>Seleccionar tipo</option>
+                <option value="Examen">Examen</option>
+                <option value="Entrega">Entrega</option>
+                <option value="Quiz">Quiz</option>
+                <option value="Exposición">Exposición</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="task-subject">Asignatura</label>
+              <input type="text" id="task-subject" required>
+            </div>
+            <div class="form-group">
+              <label for="task-date">Fecha</label>
+              <input type="date" id="task-date" required>
+            </div>
+            <div class="form-group">
+              <label for="task-time">Hora</label>
+              <input type="time" id="task-time" required>
+            </div>
+            <div class="form-group">
+              <label for="task-value">Valor (%)</label>
+              <input type="number" id="task-value" min="1" max="100" required>
+            </div>
+            <div class="form-group">
+              <label for="task-comment">Comentario (máx. 20 caracteres)</label>
+              <input type="text" id="task-comment" maxlength="20">
+              <span id="char-count">0/20</span>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="cancel-btn">Cancelar</button>
+              <button type="submit" class="submit-btn">Guardar</button>
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="settings-group">
-        <label class="settings-label" for="breakTime">Tiempo de descanso (max. 30 minutos)</label>
-        <input type="number" id="breakTime" class="settings-input" min="1" max="30" value="5">
+
+    </section>
+
+    <!-- Error Popup -->
+    <div class="popup-overlay" id="errorPopup">
+      <div class="popup-container">
+        <div class="popup-header">
+          <h3>Error</h3>
+          <button class="popup-close" id="closeErrorPopup">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="popup-content">
+          <div class="popup-icon">
+            <img src="src/assets/images/error.svg" alt="Error" class="error-icon">
+          </div>
+          <p id="errorMessage">Ha ocurrido un error.</p>
+        </div>
+        <div class="popup-footer">
+          <button class="popup-btn" id="confirmErrorPopup">Aceptar</button>
+        </div>
       </div>
-      <div class="settings-group">
-        <label class="settings-label" for="repetitionsCount">Número de repeticiones (max. 10)</label>
-        <input type="number" id="repetitionsCount" class="settings-input" min="1" max="10" value="4">
-      </div>
-      <button class="save-settings" id="saveSettings">Guardar cambios</button>
     </div>
-  </div>
 
-  <!-- Popup de notificación -->
-  <div id="popupNotification" class="popup hidden">
-    <p id="popupMessage"></p>
-    <button id="closePopup">Cerrar</button>
-  </div>
+    <!-- Success Popup -->
+    <div class="popup-overlay" id="successPopup">
+      <div class="popup-container">
+        <div class="popup-header">
+          <h3>Éxito</h3>
+          <button class="popup-close" id="closeSuccessPopup">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="popup-content">
+          <div class="popup-icon">
+            <img src="src/assets/images/check.svg" alt="Éxito" class="success-icon">
+          </div>
+          <p id="successMessage">Acción completada con éxito.</p>
+        </div>
+        <div class="popup-footer">
+          <button class="popup-btn" id="confirmSuccessPopup">Aceptar</button>
+        </div>
+      </div>
+    </div>
 
-  <!-- Sonido alarma pomodoro -->
-  <audio id="alarmSound" src="img/pomo-alarm.mp3"></audio>
+    <!-- script main -->
+    <script type="module" src="./src/js/main.js"></script>
+    <!-- script theme -->
+    <script>
+      function toggleTheme() {
+        const body = document.body;
+        const moonIcon = document.querySelector('.moon-icon');
+        const sunIcon = document.querySelector('.sun-icon');
 
+        body.classList.toggle('dark-mode');
+
+        // Toggle icons
+        if (body.classList.contains('dark-mode')) {
+          moonIcon.style.display = 'none';
+          sunIcon.style.display = 'block';
+        } else {
+          moonIcon.style.display = 'block';
+          sunIcon.style.display = 'none';
+        }
+
+        // Guardar preferencia en localStorage
+        localStorage.setItem('darkMode', body.classList.contains('dark-mode'));
+      }
+
+      const darkMode = localStorage.getItem('darkMode') === 'true';
+      if (darkMode) {
+        document.body.classList.add('dark-mode');
+        document.querySelector('.moon-icon').style.display = 'none';
+        document.querySelector('.sun-icon').style.display = 'block';
+      }
+
+    </script>
+
+  </main>
 </body>
+
 </html>
