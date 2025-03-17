@@ -2,7 +2,7 @@ export function loadTodayTasks() {
     // Obtener usuario actual
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
     if (!currentUser || !currentUser.tasks) {
-        console.log("No hay usuario autenticado o no tiene tareas.");
+        //console.log("No hay usuario autenticado o no tiene tareas.");
         return;
     }
 
@@ -14,8 +14,8 @@ export function loadTodayTasks() {
         year: "numeric"
     });
 
-    console.log("Fecha de hoy:", todayFormatted);
-    console.log("Tareas guardadas:", currentUser.tasks);
+    //console.log("Fecha de hoy:", todayFormatted);
+    //console.log("Tareas guardadas:", currentUser.tasks);
 
     // Filtrar tareas para hoy asegurando el formato correcto
     const todayTasks = currentUser.tasks.filter(task => {
@@ -30,7 +30,7 @@ export function loadTodayTasks() {
         return taskDate === todayFormatted;
     });
 
-    console.log("Tareas encontradas para hoy:", todayTasks);
+    //console.log("Tareas encontradas para hoy:", todayTasks);
 
     // Mostrar tareas o mensaje de "sin tareas"
     const taskListContainer = document.getElementById("task-list");
