@@ -31,13 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (logged === "true") {
         if (curView === "splashScreen" || !curView) {
-            console.log("Usuario logueado pero atrapado en splash. Corrigiendo...");
+            //console.log("Usuario logueado pero atrapado en splash. Corrigiendo...");
             curView = "today-view";
             localStorage.setItem("currentScreen", curView);
             loadTodayTasks();
         }
 
-        console.log("📌 Navegando a:", curView);
+        //console.log("📌 Navegando a:", curView);
 
         setTimeout(() => {
             navigation.showView(curView);

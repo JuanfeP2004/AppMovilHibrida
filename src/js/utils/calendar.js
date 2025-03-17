@@ -1,9 +1,11 @@
 // calendar.js
 // Obtener elementos del DOM
 const monthCurrent = document.querySelector('.month-current');
-const monthBf = document.querySelector('#month-bf');
-const monthAf = document.querySelector('#month-af');
+const monthBf = document.querySelector('#month-bf'); //Boton para retroceder el mes
+const monthAf = document.querySelector('#month-af'); //Boton para avanzar el mes
 const calendarList = document.querySelector('.calendar-list');
+const month_before = document.querySelector('.month-inactive-bf'); //Mes anterior al actual
+const month_after = document.querySelector('.month-inactive-af');  //Mes siguiente al actual
 
 // Meses del año
 const months = [
@@ -13,8 +15,17 @@ const months = [
 
 // Función para renderizar el calendario
 function renderCalendar(month, year, tasks) {
-    console.log(`Renderizando: ${months[month]} ${year} (currentMonth: ${month}, currentYear: ${year})`);
+    console.log(`Renderizando: ${months[month]} ${year} (currentMonth: ${month}, currentYear: ${year})`); // Depuración
     monthCurrent.textContent = `${months[month]} ${year}`;
+    // Mostrar meses adyacentes
+    month_before.textContent = `${months[month - 1]}`;
+    month_after.textContent = `${months[month + 1]}`;
+    // Si el mes es enero, mostrar diciembre del año anterior
+    if (month === 0) {
+        month_before.textContent = `${months[11]}`;
+        month_after.textContent = `${months[month + 1]}`;
+    }
+    // Limpiar el contenido actual
     calendarList.innerHTML = '';
 
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -102,6 +113,7 @@ export function initializeCalendar(month = new Date().getMonth(), year = new Dat
             month = 11;
             year--;
         }
+
         console.log(`Navegando atrás a: ${months[month]} ${year} (month: ${month}, year: ${year})`);
         renderCalendar(month, year, currentUser.tasks);
     });

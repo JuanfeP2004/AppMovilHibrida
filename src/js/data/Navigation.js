@@ -28,12 +28,12 @@ export class Navigation {
     }
 
     showView(viewId) {
-        console.log("🔄 Cambiando a vista:", viewId);
+        //console.log("🔄 Cambiando a vista:", viewId); //Depuración
         localStorage.setItem("currentScreen", viewId);
 
         // Verifica si la vista es parte del dashboard
         if (this.dashboardViews.includes(viewId)) {
-            console.log("📌 Vista dentro de dashboard");
+            //console.log("📌 Vista dentro de dashboard"); //Depuración
             document.getElementById('dashboardScreen').classList.remove('inactive');
 
             this.dashboardViews.forEach(view => {
@@ -46,7 +46,7 @@ export class Navigation {
                 }
             });
         } else {
-            console.log("📌 Vista principal fuera del dashboard");
+            //console.log("📌 Vista principal fuera del dashboard"); //Depuración
             // Ocultar todas las vistas principales
             this.views.forEach(view => {
                 if (document.getElementById(view)) {
