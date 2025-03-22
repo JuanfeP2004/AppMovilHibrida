@@ -1,4 +1,6 @@
 // calendar.js
+
+import { showErrorPopup } from './popUps.js';
 // Obtener elementos del DOM
 const monthCurrent = document.querySelector('.month-current');
 const monthBf = document.querySelector('#month-bf'); //Boton para retroceder el mes
@@ -15,7 +17,7 @@ const months = [
 
 // Función para renderizar el calendario
 function renderCalendar(month, year, tasks) {
-    console.log(`Renderizando: ${months[month]} ${year} (currentMonth: ${month}, currentYear: ${year})`); // Depuración
+    //console.log(`Renderizando: ${months[month]} ${year} (currentMonth: ${month}, currentYear: ${year})`); // Depuración
     monthCurrent.textContent = `${months[month]} ${year}`;
     // Mostrar meses adyacentes
     month_before.textContent = `${months[month - 1]}`;
@@ -24,6 +26,11 @@ function renderCalendar(month, year, tasks) {
     if (month === 0) {
         month_before.textContent = `${months[11]}`;
         month_after.textContent = `${months[month + 1]}`;
+    }
+    // Si el mes es diciembre, mostrar enero del año siguiente
+    if (month === 11) {
+        month_before.textContent = `${months[month - 1]}`;
+        month_after.textContent = `${months[0]}`;
     }
     // Limpiar el contenido actual
     calendarList.innerHTML = '';
@@ -90,11 +97,12 @@ function renderCalendar(month, year, tasks) {
 export function initializeCalendar(month = new Date().getMonth(), year = new Date().getFullYear()) {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser || !currentUser.tasks) {
-        console.error('Usuario no encontrado o sin tareas');
+        //console.error('Usuario no encontrado o sin tareas');
+        showErrorPopup('Usuario no encontrado o sin tareas.');
         return;
     }
 
-    console.log(`Inicializando calendario: ${months[month]} ${month} ${year}`); // Depuración
+    //console.log(`Inicializando calendario: ${months[month]} ${month} ${year}`); // Depuración
 
     // Renderizar el calendario inicial con los parámetros proporcionados
     renderCalendar(month, year, currentUser.tasks);
@@ -114,7 +122,7 @@ export function initializeCalendar(month = new Date().getMonth(), year = new Dat
             year--;
         }
 
-        console.log(`Navegando atrás a: ${months[month]} ${year} (month: ${month}, year: ${year})`);
+        //console.log(`Navegando atrás a: ${months[month]} ${year} (month: ${month}, year: ${year})`);
         renderCalendar(month, year, currentUser.tasks);
     });
 
@@ -128,7 +136,7 @@ export function initializeCalendar(month = new Date().getMonth(), year = new Dat
             month = 0;
             year++;
         }
-        console.log(`Navegando adelante a: ${months[month]} ${year} (month: ${month}, year: ${year})`);
+        //console.log(`Navegando adelante a: ${months[month]} ${year} (month: ${month}, year: ${year})`);
         renderCalendar(month, year, currentUser.tasks);
     });
 
