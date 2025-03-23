@@ -19,6 +19,26 @@ document.addEventListener('DOMContentLoaded', () => {
     let logged = localStorage.getItem("loggedIn");
     let curView = localStorage.getItem("currentScreen") || "loginScreen";
 
+    // Obtener lista de usuarios
+    // Obtener la lista de usuarios almacenados
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    
+    // Verificar si el usuario de prueba ya existe
+    const testUserExists = users.some(user => user.username === "testuser");
+
+    if (!testUserExists) {
+        // Crear usuario de prueba
+        const testUser = {
+            username: "testuser",
+            password: "testpass", // Debe coincidir con la que das en la Play Store
+            tasks: [] // Puede empezar vacío o con tareas de prueba
+        };
+
+        users.push(testUser);
+        localStorage.setItem("users", JSON.stringify(users));
+        console.log("Usuario de prueba creado.");
+    }
+
     // Función para actualizar el estado activo de los botones
     function updateActiveButton(view) {
         document.querySelectorAll('.nav-btn').forEach(btn => {

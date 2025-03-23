@@ -15,6 +15,12 @@ export async function registerUser(username, password, confirmPassword) {
         return;
     }
 
+    // Verificar que la contraseña tenga al menos 6 caracteres
+    if (password.length < 6) {
+        showErrorPopup("La contraseña debe tener al menos 6 caracteres.");
+        return;
+    }
+
     // Obtener la lista de usuarios almacenados
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
