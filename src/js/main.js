@@ -1,5 +1,5 @@
 import { showRegisterScreen } from './utils/splash.js';
-import { registerUser } from './utils/register.js';
+import { registerUser, registerTestUser } from './utils/register.js';
 import { Navigation } from './data/Navigation.js';
 import { showRegisterScreenL, showLoginScreenL } from './utils/easyNav.js';
 import { loginUser } from './utils/logIn.js';
@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let curView = localStorage.getItem("currentScreen") || "loginScreen";
 
     // Obtener lista de usuarios
-    // Obtener la lista de usuarios almacenados
     let users = JSON.parse(localStorage.getItem("users")) || [];
     
     // Verificar si el usuario de prueba ya existe
@@ -30,13 +29,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Crear usuario de prueba
         const testUser = {
             username: "testuser",
-            password: "testpass", // Debe coincidir con la que das en la Play Store
-            tasks: [] // Puede empezar vacío o con tareas de prueba
+            password: "testpass", 
+            tasks: [] 
         };
 
-        users.push(testUser);
-        localStorage.setItem("users", JSON.stringify(users));
-        console.log("Usuario de prueba creado.");
+        registerTestUser(testUser.username, testUser.password, testUser.password);
     }
 
     // Función para actualizar el estado activo de los botones

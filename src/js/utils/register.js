@@ -55,3 +55,28 @@ export async function registerUser(username, password, confirmPassword) {
         showErrorPopup("Ocurrió un error. Inténtalo de nuevo.");
     }
 }
+
+export async function registerTestUser(username, password, confirmPassword) {
+
+    try {
+        // Hashear la contraseña
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
+
+        // Crear el nuevo usuario
+        const newUser = new User(username, hashedPassword);
+
+        // Agregar el nuevo usuario al array
+        users.push(newUser);
+
+        // Guardar el array actualizado en localStorage
+        localStorage.setItem("users", JSON.stringify(users));
+
+        //debug
+        console.log("Usuario de test: ", newUser);
+
+    } catch (error) {
+        console.error("Error al registrar:", error);
+        showErrorPopup("Ocurrió un error. Inténtalo de nuevo.");
+    }
+}
