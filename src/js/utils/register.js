@@ -66,6 +66,9 @@ export async function registerTestUser(username, password, confirmPassword) {
         // Crear el nuevo usuario
         const newUser = new User(username, hashedPassword);
 
+        // Obtener lista de usuarios
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+
         // Agregar el nuevo usuario al array
         users.push(newUser);
 
